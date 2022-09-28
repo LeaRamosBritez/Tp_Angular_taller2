@@ -6,6 +6,15 @@ import {CardModule} from 'primeng/card';
 import {StyleClassModule} from 'primeng/styleclass';
 import {CheckboxModule} from 'primeng/checkbox';
 import {CarouselModule} from 'primeng/carousel';
+import {InputTextModule} from 'primeng/inputtext';
+import {PasswordModule} from 'primeng/password';
+import {DividerModule} from 'primeng/divider';
+import {ImageModule} from 'primeng/image';
+import {ChipsModule} from 'primeng/chips';
+import {CalendarModule} from 'primeng/calendar';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,7 +37,16 @@ import { LoginComponent } from './login/login.component';
     CardModule,
     StyleClassModule,
     CheckboxModule,
-    CarouselModule
+    CarouselModule,
+    InputTextModule,
+    PasswordModule,
+    DividerModule,
+    ImageModule,
+    ChipsModule,
+    CalendarModule,
+    AutoCompleteModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
