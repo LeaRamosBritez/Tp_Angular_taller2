@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Iuser } from '../models/iuser';
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
+  msgs1: Message[];
   email: string;
   password: string;
 
@@ -18,6 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.msgs1 = [
+      {severity:'success', summary:'Success', detail:'Message Content'},
+  ];
   }
 
   onLogin(): void{
@@ -54,6 +59,7 @@ export class LoginComponent implements OnInit {
     
           onFailure: (err) => {
             alert(err.message || JSON.stringify(err));
+            
             this.router.navigate(['/signup']);
           }
         },);
