@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestService } from '../rest.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private RestService:RestService) { }
 
   ngOnInit(): void {
+    this.cargarData();
+  }
+
+  public cargarData(){
+    this.RestService.get('http://localhost:3000/productos')
+    .subscribe(respuesta => {
+      console.log(respuesta);
+    });
   }
 
 }
