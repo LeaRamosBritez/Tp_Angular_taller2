@@ -11,5 +11,12 @@
   <h1>TPA Tienda</h1>
 
   <button pButton type="button"> Hola</button>
+
+
+  <app-card [dataEntrante]="detalleProducto" *ngFor="let detalleProducto of listaProductos"></app-card>
+
+
+  <app-carrito></app-carrito>
+
 </body>
 </html>

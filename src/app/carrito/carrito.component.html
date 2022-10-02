@@ -1,0 +1,20 @@
+<h2>Carrito</h2>
+
+<div  style="background-color: red;">
+<ul class="favorite-list">
+    
+    <li *ngFor="let producto of listaProductosEnCarrito">
+
+        <div class="card">
+            <img [attr.width]="'100px'" [attr.height]="'100px'" class="image" [src]="producto?.data?.img" alt="">
+        </div>
+
+        <div>
+            Nombre Producto: {{producto?.data?.nombre}}
+        </div>
+
+    </li>
+
+</ul>
+
+</div>
