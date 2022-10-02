@@ -1,20 +1,36 @@
-<h2>Carrito</h2>
+<div style="background-color: #D4F7E1;">
+<h2><i class="bi bi-cart4"></i>Carrito</h2>
 
-<div  style="background-color: red;">
-<ul class="favorite-list">
+
+<ul class="list-group">
     
-    <li *ngFor="let producto of listaProductosEnCarrito">
+    <li class="list-group-item" *ngFor="let producto of listaProductosEnCarrito; let i = index">
 
-        <div class="card">
+        <div>
             <img [attr.width]="'100px'" [attr.height]="'100px'" class="image" [src]="producto?.data?.img" alt="">
         </div>
 
         <div>
-            Nombre Producto: {{producto?.data?.nombre}}
-        </div>
+        Producto: {{producto?.data?.nombre}}
+        </div> 
+        <div>
+        Precio: ${{producto?.data?.precio}}
+        </div> 
+        <button class="btn btn-danger" (click)="eliminarDelCarrito(i)">Eliminar producto</button>
+        <hr>
 
     </li>
 
 </ul>
+
+<div *ngIf="listaProductosEnCarrito.length===0; else elseBlock">
+El carrito de compras está vacío.
+</div>
+<ng-template #elseBlock>
+    <button class="btn btn-success">Comprar productos</button>
+</ng-template>
+
+
+
 
 </div>

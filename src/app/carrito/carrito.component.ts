@@ -19,4 +19,9 @@ export class CarritoComponent implements OnInit {
     })
   }
 
+  eliminarDelCarrito(index:any){
+
+    this.listaProductosEnCarrito.splice(index, 1);
+  }
+
 }
