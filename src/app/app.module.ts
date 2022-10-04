@@ -17,19 +17,22 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {AvatarModule} from 'primeng/avatar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     HttpClientModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

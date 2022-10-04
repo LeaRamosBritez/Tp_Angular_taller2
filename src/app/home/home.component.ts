@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
 
   attributeList: CognitoUserAttribute[];
 
+  userCurrent:Boolean = false;
+
   poolData = {
     UserPoolId: environment.UserPoolId,
     ClientId: environment.ClientId, 
@@ -20,20 +22,12 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
-  logout(): void{
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    if (cognitoCurrentUser != null) {
-      cognitoCurrentUser.signOut();
-      localStorage.removeItem('token');
-      this.router.navigate(['/login']);
-    }else{
-      alert('No hay usuario logueado');
-      this.router.navigate(['/login']);
-    }
-  }
+
+
+
 
 
   getAttributesCurretUser(): void {
