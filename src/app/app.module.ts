@@ -18,6 +18,15 @@ import { HttpClientModule } from '@angular/common/http';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {AvatarModule} from 'primeng/avatar';
+import {DataViewModule} from 'primeng/dataview';
+import {DropdownModule} from 'primeng/dropdown';
+import {RatingModule} from 'primeng/rating';
+import {SidebarModule} from 'primeng/sidebar';
+import {ToastModule} from 'primeng/toast';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {MenuModule} from 'primeng/menu';
+import {BadgeModule} from 'primeng/badge';
+import {DialogModule} from 'primeng/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +47,7 @@ import { NavComponent } from './nav/nav.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    BadgeModule,
     ButtonModule,
     CardModule,
     StyleClassModule,
@@ -54,7 +64,15 @@ import { NavComponent } from './nav/nav.component';
     HttpClientModule,
     MessagesModule,
     MessageModule,
-    AvatarModule
+    MenuModule,
+    AvatarModule,
+    DataViewModule,
+    DropdownModule,
+    RatingModule,
+    ToastModule,
+    SidebarModule,
+    DynamicDialogModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
