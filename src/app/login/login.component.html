@@ -1,17 +1,52 @@
-<div class="bg-indigo-500">
-    <h5>Severities</h5>
-    <button pButton pRipple type="button" label="Primary"></button>
-    <button pButton pRipple type="button" label="Secondary" class="p-button-secondary"></button>
-    <button pButton pRipple type="button" label="Success" class="p-button-success"></button>
-    <button pButton pRipple type="button" label="Info" class="p-button-info"></button>
-    <button pButton pRipple type="button" label="Warning" class="p-button-warning"></button>
-    <button pButton pRipple type="button" label="Help" class="p-button-help"></button>
-    <button pButton pRipple type="button" label="Danger" class="p-button-danger"></button>
-    
-    <h5>Icons</h5>
-    <p-button icon="pi pi-check"></p-button>
-    <p-button label="Submit" icon="pi pi-check"></p-button>
-    <p-button label="Submit" icon="pi pi-check" iconPos="right"></p-button>
-    
-    
+<div class="container px-2 h-100 w-100 d-flex justify-content-center mt-5">
 
+    <div class="row p-0 shadow container-xl m-0 mt-5 h-75 rounded-3 m-auto h-100 w-100">
+        <div class="d-none d-lg-flex col-lg-6 bg-danger rounded-3 p-0 ">
+            <p-image imageClass="h-100 w-100 rounded-3 img-fluid" src="/assets/images/fondoLogin.jpg" alt="img"></p-image>
+        </div>
+
+        <div class="col-12 col-lg-6 p-5 pb-0 p-md-1 bg-success rounded-3 d-flex flex-column align-items-center">
+				
+                <form (ngSubmit)="onLogin()" class="m-2 mb-3 p-5 w-100 d-flex flex-column align-items-center">
+                <h2 class="text-center mb-lg-5 ">
+                    Bienvenido a Food
+                </h2>
+                    <div class="mb-3 mt-5 w-100">      
+                        <span class="p-float-label">
+                            <input id="email" type="email" name="email" [(ngModel)]="email" pInputText class="w-100"> 
+                            <label for="email">Email</label>
+                        </span>
+                    </div>
+                    
+                    <div class="mb-3 w-100 mt-3"> 
+                        <span class="p-float-label">
+                            <input type="password" name="password" id="password" [(ngModel)]="password" pPassword class="w-100"/>
+                            <label for="password">Password</label>
+                        </span>       
+                    </div>
+                    <div class="mt-5">
+                        <button pButton pRipple type="submit" label="Login" class="border-0 w-100 shadow-sm rounded-3"></button>
+                    </div>
+                </form>
+                <div class="text-center mt-4">
+                <span class="text-">
+                    Forgot
+                </span>
+                    <a class="text-center text-decoration-none text-dark fw-bold" href="#">
+                        Username / Password?
+                    </a>
+                </div>
+                <div class="mt-5 text-center ">
+                    <a class="text-decoration-none text-dark" href="ir-a-registrarme">
+                        Crea tu cuenta
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+        </div>
+    </div>
+</div>
+<!--
+<div class="container">
+    <p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
+</div>  -->

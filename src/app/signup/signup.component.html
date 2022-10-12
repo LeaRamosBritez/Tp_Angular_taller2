@@ -1,1 +1,88 @@
-<p>signup works!</p>
+<div class="fondo-login container-fluid px-2 pb-5 h-100 w-100 d-flex justify-content-center mt-lg-3 mt-xl-5 ">
+  <div class="row p-0 shadow container-xl   rounded-3 m-lg-auto m-0 mt-5 ">
+    <div class="col-12 col-md-6 bg-danger d-none d-md-flex rounded-3 p-0 ">
+      <p-image imageClass="h-100 w-100 rounded-3 img-fluid" src="/assets/images/fondoLogin.jpg" alt="img"></p-image>
+    </div>
+
+    <div class="col-12 col-md-6 p-5 pb-0 p-md-1 bg-success rounded-3 d-flex flex-column align-items-center">
+
+      <form (ngSubmit)="onRegistrer()"
+        class="p-fluid m-2 mb-3 p-5 w-100 d-flex flex-column flex-md-row align-items-center row">
+        <h2 class="text-center mb-lg-5 ">
+          Bienvenido a Food
+        </h2>
+
+        <div class="field col-12 col-md-6 my-3">
+          <span class="p-float-label">
+            <input id="email" type="email" name="email" [(ngModel)]="email" pInputText>
+            <label for="email">Email</label>
+          </span>
+        </div>
+        
+        <div class="field col-12 col-md-6 my-3">
+          <span class="p-float-label">
+            <p-password type="password" name="password" inputId="password" [(ngModel)]="password">
+          <ng-template pTemplate="header">
+            <h6>Contraseña</h6>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <p-divider></p-divider>
+            <p class="mt-2">Obligatorio</p>
+            <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+              <li>Requiere una minuscula</li>
+              <li>Requiere una mayuscula</li>
+              <li>Requiere un numero</li>
+              <li>Minimo 8 Caracteres</li>
+            </ul>
+          </ng-template>
+          </p-password>
+          <label for="password">Contraseña</label>
+        </span>
+
+        </div>
+
+
+
+
+
+        <div class="field col-12 col-md-6 my-3">
+          <span class="p-float-label">
+            <input id="nickname" type="text" name="nickname" [(ngModel)]="nickname" pInputText>
+            <label for="nickname">Nombre de Usuario</label>
+          </span>
+        </div>
+        <div class="field col-12 col-md-6 my-3">
+          <span class="p-float-label">
+            <input id="name" type="text" name="name" [(ngModel)]="name" pInputText>
+            <label for="name">Nombre</label>
+          </span>
+        </div>
+        <div class="field col-12 col-md-6 my-3">
+          <span class="p-float-label">
+            <input id="family_name" type="text" name="family_name" [(ngModel)]="family_name" pInputText>
+            <label for="family_name">Apellido</label>
+          </span>
+        </div>
+        <div class="field col-12 col-md-6 my-3">
+          <span class="p-float-label">
+            <input id="address" type="text" name="address" [(ngModel)]="address" pInputText>
+            <label for="address">Direccion</label>
+          </span>
+        </div>
+
+        <div class="mt-5">
+          <button pButton pRipple type="submit" label="Crear Cuenta"
+            class="border-0 w-100 shadow-sm rounded-3"></button>
+        </div>
+      </form>
+
+      <div class="mb-5 text-center ">
+        <a class="text-decoration-none text-dark" href="ir-a-registrarme">
+          Ir a Login
+          <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
