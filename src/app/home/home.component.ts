@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+
+import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-home',
@@ -20,18 +23,45 @@ export class HomeComponent implements OnInit {
     UserPoolId: environment.UserPoolId,
     ClientId: environment.ClientId, 
   };
-  
-  constructor(private router: Router) { }
+
+  constructor(private RestService:RestService,private router: Router) { }
+
+  public listaProductos:any = [];
 
   ngOnInit(): void {
+    this.cargarData();
 
+    this.listaProductos= [
+      {
+        nombre:'Queso',
+        precio: '300'
+      },
+      {
+        nombre:'Fideos',
+        precio: '120'
+      },
+      {
+        nombre:'Arroz',
+        precio: '90'
+      }
+    ]
   }
 
-  showBasicDialog2() {
-    this.displayBasic2 = true;
-}
+  public cargarData(){
+    this.RestService.get('http://localhost:3000/productos')
+    .subscribe(respuesta => {
+      console.log(respuesta);
 
-  getAttributesCurretUser(): void {
+      this.listaProductos = respuesta;
+    });
+  }
+
+  
+  showBasicDialog2(){
+    this.displayBasic2 = true;
+    }
+
+   getAttributesCurretUser(): void {
     var userPool = new CognitoUserPool(this.poolData);
     var cognitoCurrentUser = userPool.getCurrentUser();
 
@@ -59,5 +89,5 @@ export class HomeComponent implements OnInit {
         });
       });
     }
-  }
+ }
 }

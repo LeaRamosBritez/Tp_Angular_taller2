@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
@@ -29,13 +29,17 @@ import {BadgeModule} from 'primeng/badge';
 import {DialogModule} from 'primeng/dialog';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {TableModule} from 'primeng/table';
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { CardComponent } from './card/card.component';
+import { CarritoComponent } from './carrito/carrito.component';
 import { NavComponent } from './nav/nav.component';
+
+
 
 @NgModule({
   declarations: [
@@ -43,6 +47,8 @@ import { NavComponent } from './nav/nav.component';
     HomeComponent,
     SignupComponent,
     LoginComponent,
+    CardComponent,
+    CarritoComponent,
     NavComponent
   ],
   imports: [
@@ -51,11 +57,13 @@ import { NavComponent } from './nav/nav.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     BadgeModule,
+    FormsModule,
     ButtonModule,
     CardModule,
     StyleClassModule,
     CheckboxModule,
     CarouselModule,
+    HttpClientModule,
     InputTextModule,
     SidebarModule,
     PasswordModule,
@@ -78,6 +86,7 @@ import { NavComponent } from './nav/nav.component';
     SidebarModule,
     DynamicDialogModule,
     DialogModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
