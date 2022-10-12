@@ -1,0 +1,48 @@
+.navegador{
+    height: 10vh!important;
+}
+
+.b-sign-up
+{
+    background-color: #DDEBED;
+    color: #174C4A;
+    border-radius: 4px;
+    padding: 7px 7px;
+    margin: 0px 5px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover
+    {
+        background-color: #ddebeddb;
+        color: #174C4A;
+    }
+}
+
+.btn-login
+{
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 7px 7px;
+    margin: 0px 5px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover
+    {
+        background-color: rgba(255, 255, 255, 0.069);
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+    }
+}

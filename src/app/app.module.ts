@@ -27,6 +27,8 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {MenuModule} from 'primeng/menu';
 import {BadgeModule} from 'primeng/badge';
 import {DialogModule} from 'primeng/dialog';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {TableModule} from 'primeng/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +47,7 @@ import { NavComponent } from './nav/nav.component';
   ],
   imports: [
     BrowserModule,
+    TableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BadgeModule,
@@ -54,9 +57,11 @@ import { NavComponent } from './nav/nav.component';
     CheckboxModule,
     CarouselModule,
     InputTextModule,
+    SidebarModule,
     PasswordModule,
     DividerModule,
     ImageModule,
+    OverlayPanelModule,
     ChipsModule,
     CalendarModule,
     AutoCompleteModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -9,16 +9,23 @@ import { environment } from 'src/environments/environment';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
+
 export class NavComponent implements OnInit {
+
   poolData = {
     UserPoolId: environment.UserPoolId,
     ClientId: environment.ClientId, 
   };
 
+  public listaProductos:any = [];
+
+  selectedProduct: any;
   display: any;
-  
   userCurrent:Boolean = false;
   items: MenuItem[];
+
+
+
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -50,6 +57,40 @@ export class NavComponent implements OnInit {
           }
       ]}
   ];
+
+  this.listaProductos= [
+    {
+      nombre:'Queso',
+      precio: '300',
+      imagen:'queso.jpg'
+    },
+    {
+      nombre:'Fideos',
+      precio: '120',
+      imagen:'fideos.png'
+    },
+    {
+      nombre:'Arroz',
+      precio: '90',
+      imagen:'arroz.png'
+    },    {
+      nombre:'Queso',
+      precio: '300',
+      imagen:'queso.jpg'
+    },
+    {
+      nombre:'Fideos',
+      precio: '120',
+      imagen:'fideos.png'
+    },
+    {
+      nombre:'Arroz',
+      precio: '90',
+      imagen:'arroz.png'
+    }
+  ]
+
+
     this.getUserCurrentUser();
   }
 
