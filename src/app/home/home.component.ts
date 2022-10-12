@@ -19,8 +19,12 @@ export class HomeComponent implements OnInit {
   visibleSidebar5: any;
   userCurrent:Boolean = false;
 
+  poolData = {
+    UserPoolId: environment.UserPoolId,
+    ClientId: environment.ClientId, 
+  };
 
-  constructor(private RestService:RestService) { }
+  constructor(private RestService:RestService,private router: Router) { }
 
   public listaProductos:any = [];
 
@@ -50,24 +54,14 @@ export class HomeComponent implements OnInit {
 
       this.listaProductos = respuesta;
     });
-
-  poolData = {
-    UserPoolId: environment.UserPoolId,
-    ClientId: environment.ClientId, 
-  };
-  
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-
-
   }
 
-  showBasicDialog2() {
+  
+  showBasicDialog2(){
     this.displayBasic2 = true;
-}
+    }
 
-  getAttributesCurretUser(): void {
+   getAttributesCurretUser(): void {
     var userPool = new CognitoUserPool(this.poolData);
     var cognitoCurrentUser = userPool.getCurrentUser();
 
@@ -95,5 +89,5 @@ export class HomeComponent implements OnInit {
         });
       });
     }
-  }
+ }
 }
