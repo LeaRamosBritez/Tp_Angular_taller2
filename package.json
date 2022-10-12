@@ -18,14 +18,8 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
-<<<<<<< HEAD
-    "bootstrap": "^5.2.1",
-    "bootstrap-icons": "^1.9.1",
-    "primeflex": "^3.2.1",
-=======
     "amazon-cognito-identity-js": "^5.2.10",
     "bootstrap": "^5.2.1",
->>>>>>> 2b2c49248d4bc3fd7e11c93bb3b065fef1b979ec
     "primeicons": "^6.0.1",
     "primeng": "^14.1.1",
     "rxjs": "~7.5.0",

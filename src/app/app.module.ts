@@ -33,13 +33,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-<<<<<<< HEAD
 import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './card/card.component';
 import { CarritoComponent } from './carrito/carrito.component';
-=======
+
 import { NavComponent } from './nav/nav.component';
->>>>>>> 2b2c49248d4bc3fd7e11c93bb3b065fef1b979ec
+
 
 @NgModule({
   declarations: [
@@ -47,12 +46,9 @@ import { NavComponent } from './nav/nav.component';
     HomeComponent,
     SignupComponent,
     LoginComponent,
-<<<<<<< HEAD
     CardComponent,
     CarritoComponent
-=======
     NavComponent
->>>>>>> 2b2c49248d4bc3fd7e11c93bb3b065fef1b979ec
   ],
   imports: [
     BrowserModule,
@@ -64,9 +60,7 @@ import { NavComponent } from './nav/nav.component';
     StyleClassModule,
     CheckboxModule,
     CarouselModule,
-<<<<<<< HEAD
     HttpClientModule
-=======
     InputTextModule,
     PasswordModule,
     DividerModule,
@@ -87,7 +81,6 @@ import { NavComponent } from './nav/nav.component';
     SidebarModule,
     DynamicDialogModule,
     DialogModule
->>>>>>> 2b2c49248d4bc3fd7e11c93bb3b065fef1b979ec
   ],
   providers: [],
   bootstrap: [AppComponent]

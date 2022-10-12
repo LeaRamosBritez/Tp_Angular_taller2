@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
+
 import { RestService } from '../rest.service';
-=======
 import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { environment } from 'src/environments/environment';
->>>>>>> 2b2c49248d4bc3fd7e11c93bb3b065fef1b979ec
+
 
 @Component({
   selector: 'app-home',
@@ -20,7 +19,7 @@ export class HomeComponent implements OnInit {
   visibleSidebar5: any;
   userCurrent:Boolean = false;
 
-<<<<<<< HEAD
+
   constructor(private RestService:RestService) { }
 
   public listaProductos:any = [];
@@ -51,7 +50,7 @@ export class HomeComponent implements OnInit {
 
       this.listaProductos = respuesta;
     });
-=======
+
   poolData = {
     UserPoolId: environment.UserPoolId,
     ClientId: environment.ClientId, 
@@ -61,7 +60,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
->>>>>>> 2b2c49248d4bc3fd7e11c93bb3b065fef1b979ec
+
   }
 
   showBasicDialog2() {
