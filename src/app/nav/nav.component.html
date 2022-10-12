@@ -1,71 +1,15 @@
-<!--<div class="container-fluid navegador" style="background-color: #174C4A;">
-  <div class="container" style="background-color: #174C4A;">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between py-xxl-3"
-      style="background-color: #174C4A;">
-      <a href="/" class="d-flex align-items-center col-lg-3 mb-2 mb-lg-0 text-dark text-decoration-none">
-        <p-avatar label="P" styleClass="mr-2" size="large" shape="circle"></p-avatar>
-      </a>
-
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-      </form>
-
-      <div *ngIf="userCurrent" class="col-md-3 text-end">
-        <button type="button" class="btn btn-login" routerLink="/login" routerLinkActive="active">Login</button>
-        <button type="button" class="btn b-sign-up" routerLink="/signup" routerLinkActive="active">Sign-up</button>
-      </div>
-
-      <div *ngIf="!userCurrent" class="text-end" style="color: #174C4A;">
-
-        <button  class="me-5 text-white border-0 fs-2" style="background-color: #174C4A;" type="button" pButton icon="fa fa-bag-shopping"  (click)="display = true" ></button>
-
-        <p-sidebar [(visible)]="display" styleClass="p-sidebar-lg" [style]="{width:'28em'}" position="right">
-          <p-table [value]="listaProductos" selectionMode="single"  [(selection)]="selectedProduct"  [paginator]="true" [rows]="5" responsiveLayout="scroll">
-            <ng-template pTemplate="header" [style]="{height:'100vh'}">
-                <tr>
-                    <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
-                    <th>Image</th>
-                    <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                    <th>Cantidad</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-product>
-                <tr [pSelectableRow]="rowData">
-                    <td>{{product.nombre}}</td>
-                    <td><img src="assets/images/productos/{{product.imagen}}" [alt]="product.imagen" height="100" width="100" class="product-image" /></td>
-                    <td>{{product.precio}}</td>
-                    <td>x2</td>
-                </tr>
-            </ng-template>
-        </p-table>
-        <p class="bg-success fw-bold d-flex justify-content-around"> <span class="text-start bg-info">Subtotal:</span> <span class="text-start bg-info">Subtotal:</span></p>
-        </p-sidebar>
-
-        <p-menu #menu [popup]="true" [model]="items"></p-menu>
-        <button class="bg-white mb-2 border-0" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="Raul Ra" (click)="menu.toggle($event)"></button>
-      
-      </div>
-  
-
-    </header>
-  </div>
-</div>
- -->
-
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #174C4A;" aria-label="Eighth navbar example">
-  <div class="container">
+<nav class="navbar navbar-expand-md m-auto" style="background-color: #174C4A;" aria-label="Eighth navbar example">
+  <div class="container justify-content-around">
     <a class="navbar-brand" href="/">
       <p-avatar label="P" styleClass="mr-2" size="large" shape="circle"></p-avatar>
     </a>
-    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div *ngIf="userCurrent" class="col-md-3 text-end">
+
+    <div *ngIf="!userCurrent" class="col-md-3 text-center">
       <button type="button" class="btn btn-login" routerLink="/login" routerLinkActive="active">Login</button>
       <button type="button" class="btn b-sign-up" routerLink="/signup" routerLinkActive="active">Sign-up</button>
     </div>
 
-    <div *ngIf="!userCurrent" class="text-end" style="color: #174C4A;">
+    <div *ngIf="userCurrent" class="text-end" style="color: #174C4A;">
 
       <button  class="me-5 text-white border-0 fs-2" style="background-color: #174C4A;" type="button" pButton icon="fa fa-bag-shopping"  (click)="display = true" ></button>
 
@@ -95,32 +39,6 @@
       <button class="bg-white mb-2 border-0" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="Raul Ra" (click)="menu.toggle($event)"></button>
     
     </div>
-    <div class="navbar-collapse collapse" id="navbarsExample07" >
-      <form>
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      </form>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown07">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
 
-
-      
-    </div>
   </div>
 </nav>
