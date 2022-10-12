@@ -1,0 +1,36 @@
+<div class="container-fluid" style="background-color: #174C4A;">
+  <div class="container" style="background-color: #174C4A;">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between py-3"
+      style="background-color: #174C4A;">
+      <a href="/" class="d-flex align-items-center col-lg-3 mb-2 mb-lg-0 text-dark text-decoration-none">
+        <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+      </a>
+
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+      </form>
+
+      <div *ngIf="!userCurrent" class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2" routerLink="/login"
+          routerLinkActive="active">Login</button>
+        <button type="button" class="btn btn-primary" routerLink="/signup" routerLinkActive="active">Sign-up</button>
+      </div>
+
+      <div *ngIf="userCurrent" class="text-end" style="color: #174C4A;">
+
+        <button  class="me-5 text-white border-0 fs-2" style="background-color: #174C4A;" type="button" pButton icon="fa fa-bag-shopping"  (click)="display = true" ></button>
+
+        <p-sidebar [(visible)]="display" styleClass="p-sidebar-md" position="right">
+          Content
+        </p-sidebar>
+
+        <p-menu #menu [popup]="true" [model]="items"></p-menu>
+        <button class="bg-white mb-2" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="Raul Ra" (click)="menu.toggle($event)"></button>
+      </div>
+  
+
+    </header>
+  </div>
+</div>
+
+
