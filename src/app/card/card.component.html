@@ -1,0 +1,27 @@
+<!-- <div class="card">
+    <img [attr.width]="'100px'" [attr.height]="'100px'" class="image" [src]="dataEntrante?.img" alt="">
+    <div class="wrapper-text">
+        <div class="title">{{dataEntrante?.nombre}}</div>
+        <div class="sub-title">{{dataEntrante?.precio}}</div>
+    </div>
+    <div class="pt-1">
+        <button class="btn btn-primary" (click)="agregarACarrito()">Agregar al carrito</button>
+    </div>
+</div> -->
+
+
+
+    <div class="card text-center" style="width: 15rem;">
+        <div class="text-center">
+            <img [attr.width]="'100px'" [attr.height]="'100px'" class="image" [src]="dataEntrante?.img" alt="">
+        </div>
+        
+        <div class="card-body">
+          <h5 class="card-title">{{dataEntrante?.nombre}}</h5>
+          <p class="card-text"> $ {{dataEntrante?.precio}}</p>
+          <button class="btn btn-primary" (click)="agregarACarrito()">Agregar al carrito</button>
+        </div>
+    </div>
+
+
+

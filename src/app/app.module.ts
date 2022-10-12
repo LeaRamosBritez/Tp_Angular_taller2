@@ -12,13 +12,18 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './card/card.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    CardComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import { LoginComponent } from './login/login.component';
     CardModule,
     StyleClassModule,
     CheckboxModule,
-    CarouselModule
+    CarouselModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
