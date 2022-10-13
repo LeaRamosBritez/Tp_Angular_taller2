@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { MenuItem } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  selector: 'app-perfil',
+  templateUrl: './perfil-usuario.component.html',
+  styleUrls: ['./perfil-usuario.component.scss']
 })
-export class NavComponent implements OnInit {
-  
-  address : string;
-  nombre: string ;
-  apellido: string;
-  email: string;
-  usuario: string;
-  emailVerificado: boolean;
+export class PerfilUsuarioComponent implements OnInit {
+    address : string;
+    nombre: string ;
+    apellido: string;
+    email: string;
+    usuario: string;
+    emailVerificado: boolean;
+
+    
 
   poolData = {
     UserPoolId: environment.UserPoolId,
@@ -25,74 +27,15 @@ export class NavComponent implements OnInit {
 
   attributes:CognitoUserAttribute[];
 
-  display: any;
-  
-  userCurrent:Boolean = false;
-  items: MenuItem[];
+
+
+
   constructor(private router:Router) { }
 
   ngOnInit(): void {
-    this.items = [{
-      label: 'Optiones',
-      items: [{
-          label: 'Perfil',
-          icon: 'pi pi-user',
-          command: () => {
-              //this.getAttributes();
-              this.router.navigate(['/perfil'])
-          }
-      },
-      {
-          label: 'Configuración',
-          icon: 'pi pi-cog',
-          command: () => {
-            
-          }
-      }
-      ]},
-      {
-          label: 'Navegación',
-          items: [{
-              label: 'Sign out',
-              icon: 'pi pi-sign-out',
-              command: () => {
-                this.logout();
-               
-              }
-          }
-      ]}
-  ];
-    this.getUserCurrentUser();
-
     this.getAttributes();
   }
 
-
-  getUserCurrentUser():void {
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    if (cognitoCurrentUser != null) {
-      this.userCurrent = true;
-      console.log('Usuario logueado: '+ this.userCurrent);
-    }else{
-      this.userCurrent = false;
-      console.log('Usuario logueado: '+ this.userCurrent);
-    }
-
-  }
-
-  logout(): void{
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    if (cognitoCurrentUser != null) {
-      cognitoCurrentUser.signOut();
-      localStorage.removeItem('token');
-      this.router.navigate(['/home']);
-    }else{
-      alert('No hay usuario logueado');
-      this.router.navigate(['/login']);
-    }
-  }
 
   getAttributes():void{
 
@@ -161,5 +104,5 @@ export class NavComponent implements OnInit {
 
 
   }
-  
+
 }

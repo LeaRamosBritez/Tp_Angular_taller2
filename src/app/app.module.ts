@@ -36,6 +36,7 @@ import { CardComponent } from './card/card.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     CardComponent,
     CarritoComponent,
-    NavComponent
+    NavComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     BrowserModule,
