@@ -9,9 +9,10 @@ import { ServicioCarritoService } from '../servicio-carrito.service';
 export class CarritoComponent implements OnInit {
 
   constructor(private servicioCarrito:ServicioCarritoService) { }
-
-
+  selectedProduct: any;
+  display: any;
   public listaProductosEnCarrito:Array<any> = [];
+
   ngOnInit(): void {
     this.servicioCarrito.disparadorCarrito.subscribe(data =>{
       console.log('recibiendo data... '+ data);

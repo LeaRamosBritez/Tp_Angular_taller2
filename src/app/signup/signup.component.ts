@@ -56,7 +56,9 @@ export class SignupComponent implements OnInit {
       }
       var cognitoUser = result.user;
       console.log(JSON.stringify(cognitoUser));
-      alert('Correo enviado para activar tu cuenta');
+
+      alert('Correo enviado para acticar tu cuenta');
+
       this.router.navigate(['/login']);
     });
 

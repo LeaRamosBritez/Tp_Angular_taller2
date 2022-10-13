@@ -5,6 +5,7 @@ import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cogn
 import { environment } from 'src/environments/environment';
 import { Message } from 'primeng/api';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,6 +14,7 @@ import { Message } from 'primeng/api';
 export class LoginComponent implements OnInit {
 
   msgs1: Message[];
+
   email: string;
   password: string;
 
@@ -59,7 +61,7 @@ export class LoginComponent implements OnInit {
     
           onFailure: (err) => {
             alert(err.message || JSON.stringify(err));
-            
+
             this.router.navigate(['/signup']);
           }
         },);

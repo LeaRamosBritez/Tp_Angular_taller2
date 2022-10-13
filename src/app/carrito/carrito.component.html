@@ -1,4 +1,4 @@
-<div style="background-color: #D4F7E1;">
+<!--<div style="background-color: #D4F7E1;">
 <h2><i class="bi bi-cart4"></i>Carrito</h2>
 
 
@@ -33,4 +33,43 @@ El carrito de compras está vacío.
 
 
 
-</div>
+</div> -->
+<button  class="me-5 text-white border-0 fs-2" style="background-color: #174C4A;" type="button" pButton icon="fa fa-bag-shopping"  (click)="display = true" ></button>
+<!--<p-sidebar [(visible)]="display"   [style]="{width:'440px'}" position="right">-->
+  <p-sidebar [(visible)]="display"   [fullScreen]="true" position="right">
+
+  <p-table [value]="listaProductosEnCarrito" selectionMode="single" [(selection)]="selectedProduct" [paginator]="true" [rows]="5"
+    responsiveLayout="scroll">
+    <ng-template pTemplate="header" [style]="{height:'100vh'}">
+      <tr>
+        <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th>Image</th>
+        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
+        </th>
+        <th>Cantidad</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-product>
+      <tr [pSelectableRow]="rowData">
+        <td>{{product.data.nombre}}</td>
+        <td><img src="assets/images/productos/{{product.data.imagen}}" [alt]="product.imagen" height="100" width="100"
+            class="product-image" /></td>
+        <td>{{product.data.precio}}</td>
+        <td>x2</td>
+        <button class="btn btn-danger" (click)="eliminarDelCarrito(product.data.codigo)">Eliminar producto</button>
+      </tr>
+    </ng-template>
+    <div *ngIf="listaProductosEnCarrito.length===0; else elseBlock">
+      El carrito de compras está vacío.
+      </div>
+
+  </p-table>
+  <p class="bg-success fw-bold d-flex justify-content-around"> <span class="text-start bg-info">Subtotal:</span> <span
+      class="text-start bg-info">Subtotal:</span></p>
+
+  <ng-template #elseBlock>
+    <button class="btn btn-success">Comprar productos</button>
+  </ng-template>
+</p-sidebar>

@@ -13,8 +13,8 @@ import {ImageModule} from 'primeng/image';
 import {ChipsModule} from 'primeng/chips';
 import {CalendarModule} from 'primeng/calendar';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
-import {HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {AvatarModule} from 'primeng/avatar';
@@ -27,7 +27,10 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {MenuModule} from 'primeng/menu';
 import {BadgeModule} from 'primeng/badge';
 import {DialogModule} from 'primeng/dialog';
-import {AppRoutingModule} from './app-routing.module';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {TableModule} from 'primeng/table';
+import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
@@ -35,8 +38,8 @@ import { LoginComponent } from './login/login.component';
 import { CardComponent } from './card/card.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+
 
 
 @NgModule({
@@ -52,9 +55,11 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
   ],
   imports: [
     BrowserModule,
+    TableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BadgeModule,
+    FormsModule,
     ButtonModule,
     CardModule,
     StyleClassModule,
@@ -62,13 +67,16 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
     CarouselModule,
     HttpClientModule,
     InputTextModule,
+    SidebarModule,
     PasswordModule,
     DividerModule,
     ImageModule,
+    OverlayPanelModule,
     ChipsModule,
     CalendarModule,
     AutoCompleteModule,
     FormsModule,
+    HttpClientModule,
     MessagesModule,
     MessageModule,
     MenuModule,
