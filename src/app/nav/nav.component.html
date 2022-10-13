@@ -24,10 +24,10 @@
           Content
         </p-sidebar>
 
-        <p-menu #menu [popup]="true" [model]="items"></p-menu>
-        <button class="bg-white mb-2" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="Raul Ra" (click)="menu.toggle($event)"></button>
+        <p-menu #menu [popup]="true" [model]="items" ></p-menu>
+        <button class="bg-white mb-2" style="color: #22312b;" type="button" pButton icon="pi pi-user" label={{nombre}} (click)="menu.toggle($event)"></button>
       </div>
-  
+
 
     </header>
   </div>
