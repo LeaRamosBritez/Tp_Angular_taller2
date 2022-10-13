@@ -33,16 +33,25 @@ export class HomeComponent implements OnInit {
 
     this.listaProductos= [
       {
+        id:1,
+        codigo:1,
         nombre:'Queso',
-        precio: '300'
+        precio: '300',
+        imagen:'queso.jpg'
       },
       {
+        id:2,
+        codigo:2,
         nombre:'Fideos',
-        precio: '120'
+        precio: '120',
+        imagen:'fideos.png'
       },
       {
+        id:3,
+        codigo:3,
         nombre:'Arroz',
-        precio: '90'
+        precio: '90',
+        imagen:'arroz.png'
       }
     ]
   }
