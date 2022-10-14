@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  numero : String = "hola";
+  
 
   constructor() { }
 
   ngOnInit(): void {
-   alert(this.numero)
+   
   }
 
 }
