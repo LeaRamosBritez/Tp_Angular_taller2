@@ -39,6 +39,8 @@ import { CardComponent } from './card/card.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { NavComponent } from './nav/nav.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 
 
@@ -51,7 +53,9 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
     CardComponent,
     CarritoComponent,
     NavComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    FooterComponent,
+    
   ],
   imports: [
     BrowserModule,
