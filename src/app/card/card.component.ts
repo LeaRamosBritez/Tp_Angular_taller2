@@ -9,8 +9,10 @@ import { ServicioCarritoService } from '../servicio-carrito.service';
 export class CardComponent implements OnInit {
   @Input() dataEntrante:any;
   public image:string;
+  displayBasic2: boolean;
+  
   constructor(private servicioCarrito:ServicioCarritoService) { }
-
+ 
   ngOnInit(): void {
     this.image = 'https://picsum.photos/536/354';
   }
@@ -21,5 +23,8 @@ export class CardComponent implements OnInit {
       data: this.dataEntrante
     });
   }
-
+  
+  showBasicDialog2(){
+    this.displayBasic2 = true;
+    }
 }
