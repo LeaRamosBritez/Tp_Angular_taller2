@@ -4,17 +4,17 @@
       <p-avatar label="P" styleClass="mr-2" size="large" shape="circle"></p-avatar>
     </a>
 
-    <div *ngIf="userCurrent" class="col-md-3 text-center">
+    <div *ngIf="!userCurrent" class="col-md-3 text-center">
       <button type="button" class="btn btn-login" routerLink="/login" routerLinkActive="active">Login</button>
       <button type="button" class="btn b-sign-up" routerLink="/signup" routerLinkActive="active">Sign-up</button>
     </div>
 
-    <div *ngIf="!userCurrent" class="text-end" style="color: #174C4A;">
+    <div *ngIf="userCurrent" class="text-end" style="color: #174C4A;">
 
       <app-carrito></app-carrito>
 
       <p-menu #menu [popup]="true" [model]="items"></p-menu>
-      <button class="bg-white mb-2 border-0" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="Raul Ra" (click)="menu.toggle($event)"></button>
+      <button class="bg-white mb-2 border-0" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="{{nombre}} {{apellido}}" (click)="menu.toggle($event)"></button>
     
     </div>
 

@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayBasic2: boolean;
+  
   attributeList: CognitoUserAttribute[];
   visibleSidebar5: any;
   userCurrent:Boolean = false;
@@ -66,9 +66,7 @@ export class HomeComponent implements OnInit {
   }
 
   
-  showBasicDialog2(){
-    this.displayBasic2 = true;
-    }
+
 
    getAttributesCurretUser(): void {
     var userPool = new CognitoUserPool(this.poolData);
