@@ -67,7 +67,7 @@ export class NavComponent implements OnInit {
               icon: 'pi pi-sign-out',
               command: () => {
                 this.logout();
-               
+                
               }
           }
       ]}
