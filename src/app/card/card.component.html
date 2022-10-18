@@ -11,62 +11,79 @@
 
 
 
-    <div class="card text-center" style="width: 15rem;">
-        <div class="text-center">
-            <img [attr.width]="'100px'" [attr.height]="'100px'" class="image" [src]="dataEntrante?.img" alt="">
-        </div>
-        
-        <div class="card-body">
-          <h5 class="card-title">{{dataEntrante?.nombre}}</h5>
-          <p class="card-text"> $ {{dataEntrante?.precio}}</p>
-          <button class="btn text-white me-2" (click)="agregarACarrito()" style="background-color: #174C4A;">
-            <i class="fa fa-bag-shopping me-2"></i>
-            <i class="fa-solid fa-plus"></i>
-        </button>
-          <button class="btn text-white bg-white botonDetalles" (click)="showBasicDialog2()"  style="background-color: #174C4A;">
-            <p class="card-text" style="color: #174C4A;">Detalles <i class="fa-solid fa-circle-info"></i></p>  
-        </button>
+<div class="card text-center" style="width: 15rem;">
+  <div class="text-center">
+    <img [attr.width]="'100px'" [attr.height]="'100px'" class="image" [src]="dataEntrante?.img" alt="">
+  </div>
 
-        <p-dialog header="Producto: {{dataEntrante?.nombre}}" [(visible)]="displayBasic2" [style]="{width: '50vw'}" styleClass="background-color: #174C4A">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-              ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-              dolore
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.</p>
-    
-            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-              aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-              consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-              qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-              incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
-              quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-              Quis
-              autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
-              vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-    
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-              atque
-              corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
-              similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem
-              rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-              cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis
-              dolor
-              repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
-              eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
-              sapiente
-              delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores
-              repellat.</p>
-            <ng-template pTemplate="footer">
-              <p-button icon="pi pi-check" (click)="displayBasic2=false" label="Ok" styleClass="p-button-text"></p-button>
+  <div class="card-body">
+    <h5 class="card-title">{{dataEntrante?.nombre}}</h5>
+    <p class="card-text"> $ {{dataEntrante?.precio}}</p>
+    <button class="btn text-white me-2" (click)="agregarACarrito()" style="background-color: #174C4A;">
+      <i class="fa fa-bag-shopping me-2"></i>
+      <i class="fa-solid fa-plus"></i>
+    </button>
+    <button class="btn text-white bg-white botonDetalles" (click)="showBasicDialog2()"
+      style="background-color: #174C4A;">
+      <p class="card-text" style="color: #174C4A;">Detalles <i class="fa-solid fa-circle-info"></i></p>
+    </button>
+
+    <p-dialog header="Detalles del Producto" [(visible)]="displayBasic2" styleClass="headerVerde ">
+      <div class="row">
+
+        <div class="col-12 col-xl-6 d-flex justify-content-center align-content-center ">
+
+          <p-galleria [value]="imagenesCarrousel" [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{'max-width': '640px', 'margin-top':'2em'}" [numVisible]="5" [circular]="true"
+            [showItemNavigators]="true" [showThumbnails]="false" [showIndicators]="true"
+            [showItemNavigatorsOnHover]="true" [showIndicatorsOnItem]="true">
+            <ng-template pTemplate="item" let-imagenesCarrousel>
+              <img [src]="imagenesCarrousel.previewImageSrc" style="width: 100%; display: block;" />
             </ng-template>
-          </p-dialog>
+            <ng-template pTemplate="thumbnail" let-imagenesCarrousel [responsiveOptions]="responsiveOptions">
+              <div class="justify-content-center">
+
+                <img [src]="imagenesCarrousel.thumbnailImageSrc" style="display: block;" />
+
+              </div>
+            </ng-template>
+          </p-galleria>
+
         </div>
-    </div>
+
+        <div class="col-12 col-xl-6 py-3 d-flex justify-content-center">
+          <div class="d-flex flex-column justify-content-around" style="max-width: 640px">
+            <h3 class="fw-bold">Producto: {{dataEntrante?.nombre}}</h3>
+            <p class="mt-3 text-xl-start fw-bold">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </p>
+            <div class="d-flex justify-content-between align-content-center">
+              <p class="fw-bold fs-4 d-inline m-auto mx-0" style="color:#174C4A ;">
+                <b>Precio: </b> $ {{dataEntrante?.precio}}
+              </p>
+              <button class="btn text-white me-2" (click)="agregarACarrito()" style="background-color: #174C4A;">
+                <p class="d-inline fw-bold me-3">Agregar al Carrito</p>
+                <i class="fa fa-bag-shopping me-2"></i>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <p-button icon="fa-solid fa-arrow-left-long" (click)="displayBasic2=false" label="Salir" styleClass="p-button-text colorBoton"></p-button>
+      </ng-template>
+    </p-dialog>
+  </div>
 
 
 
 
 
-
+</div>

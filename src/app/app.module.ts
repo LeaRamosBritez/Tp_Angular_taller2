@@ -30,6 +30,7 @@ import {DialogModule} from 'primeng/dialog';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {TableModule} from 'primeng/table';
 import { AppRoutingModule } from './app-routing.module';
+import {GalleriaModule} from 'primeng/galleria';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -40,7 +41,6 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { NavComponent } from './nav/nav.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { FooterComponent } from './footer/footer.component';
-
 
 
 
@@ -55,6 +55,7 @@ import { FooterComponent } from './footer/footer.component';
     NavComponent,
     PerfilUsuarioComponent,
     FooterComponent,
+
     
   ],
   imports: [
@@ -91,7 +92,8 @@ import { FooterComponent } from './footer/footer.component';
     ToastModule,
     SidebarModule,
     DynamicDialogModule,
-    DialogModule
+    DialogModule,
+    GalleriaModule
     
   ],
   providers: [],

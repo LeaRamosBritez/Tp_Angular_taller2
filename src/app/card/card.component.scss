@@ -1,3 +1,26 @@
 .botonDetalles{
     border: 1px solid #174C4A;
 }
+
+:host ::ng-deep{
+
+    &.headerVerde.p-dialog .p-dialog-header{
+        background-color: black;
+        color: white;
+        
+    }
+
+    &.colorBoton{
+        color: #174C4A;
+    }
+
+    .p-dialog .p-dialog-header .p-dialog-header-icon{
+        color: white;
+    }
+
+    .p-dialog{
+        padding: 10px;
+        box-shadow: none;
+    }
+}
+ 
