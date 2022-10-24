@@ -1,0 +1,175 @@
+<div class="container py-3">
+  <p>administrador works!</p>
+
+  <div class="card ">
+    <p-tabView styleClass="tabview-custom">
+      <p-tabPanel >
+        <ng-template pTemplate="header" >
+
+          <i class="pi pi-calendar"></i>
+          <span class="ms-2">Productos</span>
+        </ng-template>
+        <div class="card p-3">
+          <p-toolbar styleClass="mb-4">
+            <ng-template pTemplate="left">
+              <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2"
+                (click)="openNew()"></button>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()"
+                [disabled]="!productosSeleccionados || !productosSeleccionados.length"></button>
+            </ng-template>
+          </p-toolbar>
+
+          <p-table #dt [value]="listaProductos" [rows]="10" [paginator]="true"
+            [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
+            [(selection)]="productosSeleccionados" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+              <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Products</h5>
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt.filterGlobal($event.target.eventListeners, 'contains')"
+                    placeholder="Search..." />
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 3rem">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="Nombre">Nombre <p-sortIcon field="Nombre"></p-sortIcon>
+                </th>
+                <th>Image</th>
+                <th pSortableColumn="Precio">Precio <p-sortIcon field="Precio"></p-sortIcon>
+                </th>
+                <th pSortableColumn="Clasificacion">Clasificacion <p-sortIcon field="Clasificacion"></p-sortIcon>
+                </th>
+                <!-- 
+                    <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
+                    </th>-->
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-producto>
+              <tr>
+                <td>
+                  <p-tableCheckbox [value]="producto"></p-tableCheckbox>
+                </td>
+                <td>{{producto.nombre}}</td>
+                <td><img [src]="producto.imagen" [alt]="producto.nombre" width="100" class="shadow-4" /></td>
+                <td>{{producto.precio | currency:'USD'}}</td>
+                <td>{{producto.clasificacion}}</td>
+                <!-- <td>
+                      <p-rating [ngModel]="producto.rating" [readonly]="true" [cancel]="false"></p-rating>
+                    </td>
+                    <td><span
+                        [class]="'product-badge status-' + (producto.inventoryStatus ? producto.inventoryStatus.toLowerCase() : '')">{{producto.inventoryStatus}}</span>
+                    </td>  -->
+                <td>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-help mr-2"
+                    (click)="editProduct(producto)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                    (click)="borrarProducto(producto)"></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+              <div class="flex align-items-center justify-content-between">
+                En total hay {{listaProductos ? listaProductos.length : 0 }} productos.
+              </div>
+            </ng-template>
+          </p-table>
+        </div>
+        
+        <!-- MODALES -->
+        <p-dialog [(visible)]="diagoloProducto" [style]="{width: '450px'}" header="Detalles de Producto " [modal]="true"
+          styleClass="p-fluid">
+          <ng-template pTemplate="content">
+            <img src="https://ardiaprod.vtexassets.com/arquivos/ids/190941" [alt]="producto.nombre"
+              class="product-image" *ngIf="producto.img">
+            <div class="field">
+              <label for="name">Nombre ID :{{producto.id}}</label>
+              <input type="text" pInputText id="nombre" [(ngModel)]="producto.nombre" required autofocus />
+              <small class="p-error" *ngIf="submitted && !producto.nombre">Nombre es requerido.</small>
+            </div>
+
+            <div class="field col-12">
+              <h5 for="description">Descripcion</h5>
+              <textarea rows="5" cols="50" pInputTextarea required autoResize="autoResize"
+                [(ngModel)]="producto.descripcion"></textarea>
+              <small class="p-error" *ngIf="submitted && !producto.descripcion">Descripcion es requerido.</small>
+            </div>
+            <div class="field">
+              <label class="mb-3">Clasificacion</label>
+              <div class="formgrid grid">
+                <div class="field-radiobutton col-6">
+                  <p-radioButton id="category1" name="category" value="Accessories" required
+                    [(ngModel)]="producto.clasificacion"></p-radioButton>
+                  <label for="category1">Accessories</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                  <p-radioButton id="category2" name="category" value="Clothing" required [(ngModel)]="producto.clasificacion">
+                  </p-radioButton>
+                  <label for="category2">Clothing</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                  <p-radioButton id="category3" name="category" value="Electronics"
+                  required [(ngModel)]="producto.clasificacion"></p-radioButton>
+                  <label for="category3">Electronics</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                  <p-radioButton id="category4" name="category" value="Fitness" required [(ngModel)]="producto.clasificacion">
+                  </p-radioButton>
+                  <label for="category4">Fitness</label>
+                </div>
+                <small class="p-error" *ngIf="submitted && !producto.clasificacion">Clasificacion es requerido.</small>
+              </div>
+            </div>
+
+            <div class="formgrid grid">
+              <div class="field col">
+                <label for="precio">Precio</label>
+                <p-inputNumber id="precio" [required] [(ngModel)]="producto.precio" mode="currency" currency="USD" locale="en-US" >
+                </p-inputNumber>
+                <small class="p-error" *ngIf="submitted && !producto.precio">Precio es requerido.</small>
+              </div>
+              <!-- 
+                  <div class="field col">
+                    <label for="quantity">Quantity</label>
+                    <p-inputNumber id="quantity" [(ngModel)]="producto.cantidad"></p-inputNumber>
+                  </div>-->
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
+              (click)="hideDialog()"></button>
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
+              (click)="saveProduct()"></button>
+          </ng-template>
+        </p-dialog>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+      </p-tabPanel>
+      <p-tabPanel header="Header II">
+        <ng-template pTemplate="header">
+          <i class="pi pi-user"></i>
+          <span class="ms-2">Usuarios</span>
+        </ng-template>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+          architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+          aut fugit, sed quia consequuntur magni dolores eos qui ratione
+          voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+      </p-tabPanel>
+
+    </p-tabView>
+  </div>
+  <p-toast></p-toast>
+
+
+</div>

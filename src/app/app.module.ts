@@ -31,6 +31,14 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {TableModule} from 'primeng/table';
 import { AppRoutingModule } from './app-routing.module';
 import {GalleriaModule} from 'primeng/galleria';
+import {ToolbarModule} from 'primeng/toolbar';
+import {FileUploadModule} from 'primeng/fileupload';
+import {ConfirmDialogModule} from 'primeng/confirmdialog'; 
+import {InputNumberModule} from 'primeng/inputnumber';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {TabViewModule} from 'primeng/tabview';
+
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -41,6 +49,7 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { NavComponent } from './nav/nav.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdministradorComponent } from './administrador/administrador.component';
 
 
 
@@ -55,21 +64,27 @@ import { FooterComponent } from './footer/footer.component';
     NavComponent,
     PerfilUsuarioComponent,
     FooterComponent,
+    AdministradorComponent,
 
     
   ],
   imports: [
     BrowserModule,
     TableModule,
+    InputNumberModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BadgeModule,
     FormsModule,
     ButtonModule,
+    RadioButtonModule,
     CardModule,
+    ConfirmDialogModule,
     StyleClassModule,
     CheckboxModule,
     CarouselModule,
+    ToolbarModule,
+    TabViewModule,
     HttpClientModule,
     InputTextModule,
     SidebarModule,
@@ -87,6 +102,7 @@ import { FooterComponent } from './footer/footer.component';
     MenuModule,
     AvatarModule,
     DataViewModule,
+    FileUploadModule,
     DropdownModule,
     RatingModule,
     ToastModule,
