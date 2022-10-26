@@ -42,34 +42,41 @@ El carrito de compras está vacío.
     responsiveLayout="scroll">
     <ng-template pTemplate="header" [style]="{height:'100vh'}">
       <tr>
-        <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon>
+        <th pSortableColumn="name">Nombre<p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th>Image</th>
-        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
+        <th>Imagen</th>
+        <th pSortableColumn="price">Precio <p-sortIcon field="price"></p-sortIcon>
         </th>
-        <th>Cantidad</th>
+        <!-- <th>Cantidad</th> -->
         <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-product>
       <tr [pSelectableRow]="rowData">
         <td>{{product.data.nombre}}</td>
-        <td><img src="assets/images/productos/{{product.data.imagen}}" [alt]="product.imagen" height="100" width="100"
+        <td><img [src]="product?.data?.img" [alt]="product.imagen" height="100" width="100"
             class="product-image" /></td>
         <td>{{product.data.precio}}</td>
-        <td>x2</td>
+        <!-- <td>x1</td> -->
+        <td>
         <button class="btn btn-danger" (click)="eliminarDelCarrito(product.data.codigo)">Eliminar producto</button>
+        </td>
       </tr>
     </ng-template>
-    <div *ngIf="listaProductosEnCarrito.length===0; else elseBlock">
-      El carrito de compras está vacío.
-      </div>
+    
+
+      
 
   </p-table>
   <p class="bg-success fw-bold d-flex justify-content-around"> <span class="text-start bg-info">Subtotal:</span> <span
       class="text-start bg-info">Subtotal:</span></p>
 
-  <ng-template #elseBlock>
-    <button class="btn btn-success">Comprar productos</button>
-  </ng-template>
+
+  <div *ngIf="listaProductosEnCarrito.length===0; else elseBlock">
+    El carrito de compras está vacío.
+    </div>
+    <ng-template #elseBlock>
+      <button class="btn btn-success" (click)="comprar(listaProductosEnCarrito)">Comprar productos</button>
+    </ng-template>
+  
 </p-sidebar>

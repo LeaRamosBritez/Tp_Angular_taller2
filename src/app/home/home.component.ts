@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   }
 
   public cargarData(){
-    this.RestService.get('http://localhost:3000/productos')
+    this.RestService.get('http://localhost:3050/productos')
     .subscribe(respuesta => {
       console.log(respuesta);
 
