@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdministradorComponent } from './administrador/administrador.component';
 import { HomeGuard } from './guards/home.guard';
 import { LoginGuard } from './guards/login.guard';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent, canActivate: [LoginGuard]  },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'perfil', component : PerfilUsuarioComponent , canActivate: [HomeGuard]},
+  { path: 'administrador', component : AdministradorComponent , canActivate: [HomeGuard]},
   { path: '**', redirectTo: '/home' }
 ];
 

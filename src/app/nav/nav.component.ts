@@ -58,6 +58,13 @@ export class NavComponent implements OnInit {
           command: () => {
             
           }
+      },
+      {
+          label: 'Administrador',
+          icon: 'fa-regular fa-star',
+          command: () => {
+            this.router.navigate(['/administrador'])
+          }
       }
       ]},
       {
