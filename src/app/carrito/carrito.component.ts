@@ -14,6 +14,8 @@ export class CarritoComponent implements OnInit {
   display: any;
   public listaProductosEnCarrito:Array<any> = [];
 
+  alertSwitch:boolean;
+
   ngOnInit(): void {
     this.servicioCarrito.disparadorCarrito.subscribe(data =>{
       console.log('recibiendo data... '+ data);
@@ -32,6 +34,13 @@ export class CarritoComponent implements OnInit {
     .subscribe(respuesta => {
       console.log(respuesta);
     });
+
+    this.listaProductosEnCarrito = [];
+    this.alertSwitch = true;
+  }
+
+  cerrarAlert(){
+    this.alertSwitch = false;
   }
 
 }

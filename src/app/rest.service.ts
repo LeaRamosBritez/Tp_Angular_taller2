@@ -13,6 +13,6 @@ export class RestService {
   }
 
   public post(url:string, data:any) {
-    return this.http.post(url, data);
+    return this.http.post(url, data, {responseType: 'text'});
   }
 }

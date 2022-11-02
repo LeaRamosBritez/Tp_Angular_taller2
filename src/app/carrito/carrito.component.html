@@ -37,7 +37,7 @@ El carrito de compras está vacío.
 <button  class="me-5 text-white border-0 fs-2" style="background-color: #174C4A;" type="button" pButton icon="fa fa-bag-shopping"  (click)="display = true" ></button>
 <!--<p-sidebar [(visible)]="display"   [style]="{width:'440px'}" position="right">-->
   <p-sidebar [(visible)]="display"   [fullScreen]="true" position="right">
-
+  
   <p-table [value]="listaProductosEnCarrito" selectionMode="single" [(selection)]="selectedProduct" [paginator]="true" [rows]="5"
     responsiveLayout="scroll">
     <ng-template pTemplate="header" [style]="{height:'100vh'}">
@@ -68,8 +68,7 @@ El carrito de compras está vacío.
       
 
   </p-table>
-  <p class="bg-success fw-bold d-flex justify-content-around"> <span class="text-start bg-info">Subtotal:</span> <span
-      class="text-start bg-info">Subtotal:</span></p>
+  <p class="bg-success fw-bold d-flex justify-content-around"> <span class="text-start bg-info">Subtotal:</span> 
 
 
   <div *ngIf="listaProductosEnCarrito.length===0; else elseBlock">
@@ -78,5 +77,15 @@ El carrito de compras está vacío.
     <ng-template #elseBlock>
       <button class="btn btn-success" (click)="comprar(listaProductosEnCarrito)">Comprar productos</button>
     </ng-template>
+
+    <div *ngIf="alertSwitch===true">
+      <div class="justify-content-md-center">
+        <div class="alert alert-success" role="alert">
+          <span style="margin-right: 3%;">Compra realizada con éxito</span><button type="button" (click)="cerrarAlert()" class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
   
 </p-sidebar>
+
+
