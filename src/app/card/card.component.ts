@@ -34,17 +34,6 @@ export class CardComponent implements OnInit {
 
   cantidad:number = 1;
 
-  //Función para solo permitir numeros
-  keyPressNumbers(event:any) {
-    let charCode = (event.which) ? event.which : event.keyCode;
-    if ((charCode < 48 || charCode > 57)) {
-      event.preventDefault();
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   ngOnInit(): void {
     this.galleriaService.getImages().then(data => {
       this.imagenesCarrousel = data;

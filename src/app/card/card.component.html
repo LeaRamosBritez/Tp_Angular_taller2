@@ -19,7 +19,7 @@
   <div class="card-body">
     <h5 class="card-title">{{dataEntrante?.nombre}}</h5>
     <p class="card-text"> $ {{dataEntrante?.precio}}</p>
-    <input (paste)="false" (keypress)="keyPressNumbers($event)" id="cantidadProducto" type="number" value="1" min="1" max="5" maxlength="1" [(ngModel)]="cantidad"/>
+    <input (paste)="false" (keypress)="false" id="cantidadProducto" type="number" value="1" min="1" max="5" maxlength="1" [(ngModel)]="cantidad"/>
     <button class="btn text-white me-2" (click)="agregarACarrito()" style="background-color: #174C4A;">
       <i class="fa fa-bag-shopping me-2"></i>
       <i class="fa-solid fa-plus"></i>
