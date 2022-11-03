@@ -47,19 +47,22 @@ El carrito de compras está vacío.
         <th>Imagen</th>
         <th pSortableColumn="price">Precio <p-sortIcon field="price"></p-sortIcon>
         </th>
+        <th pSortableColumn="price">Cantidad <p-sortIcon field="price"></p-sortIcon>
+        </th>
         <!-- <th>Cantidad</th> -->
         <th></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-product>
+    <ng-template pTemplate="body" let-rowData let-product let-rowIndex="rowIndex">
       <tr [pSelectableRow]="rowData">
         <td>{{product.data.nombre}}</td>
         <td><img [src]="product?.data?.img" [alt]="product.imagen" height="100" width="100"
             class="product-image" /></td>
         <td>{{product.data.precio}}</td>
+        <td>{{product.cantidad}}</td>
         <!-- <td>x1</td> -->
         <td>
-        <button class="btn btn-danger" (click)="eliminarDelCarrito(product.data.codigo)">Eliminar producto</button>
+          <button class="btn btn-danger" (click)="eliminarDelCarrito(rowIndex)">Eliminar producto</button>
         </td>
       </tr>
     </ng-template>

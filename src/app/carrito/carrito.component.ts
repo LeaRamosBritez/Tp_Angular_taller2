@@ -18,8 +18,13 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicioCarrito.disparadorCarrito.subscribe(data =>{
-      console.log('recibiendo data... '+ data);
-      this.listaProductosEnCarrito.push(data);
+      
+      console.log('recibiendo data... '+ data.data.id);
+
+      const idProductoEntrante = data.data.id;
+      if (!this.listaProductosEnCarrito.find(p => p.data.id === idProductoEntrante)){
+        this.listaProductosEnCarrito.push(data);
+      } 
     })
   }
 

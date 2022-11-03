@@ -32,6 +32,18 @@ export class CardComponent implements OnInit {
     }
 ];
 
+  cantidad:number = 1;
+
+  //Función para solo permitir numeros
+  keyPressNumbers(event:any) {
+    let charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   ngOnInit(): void {
     this.galleriaService.getImages().then(data => {
@@ -43,7 +55,8 @@ export class CardComponent implements OnInit {
   agregarACarrito(){
     //console.log(this.dataEntrante);
     this.servicioCarrito.disparadorCarrito.emit({
-      data: this.dataEntrante
+      data: this.dataEntrante,
+      cantidad: this.cantidad
     });
   }
   
