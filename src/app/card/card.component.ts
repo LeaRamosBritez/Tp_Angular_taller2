@@ -32,6 +32,7 @@ export class CardComponent implements OnInit {
     }
 ];
 
+  cantidad:number = 1;
 
   ngOnInit(): void {
     this.galleriaService.getImages().then(data => {
@@ -43,7 +44,8 @@ export class CardComponent implements OnInit {
   agregarACarrito(){
     //console.log(this.dataEntrante);
     this.servicioCarrito.disparadorCarrito.emit({
-      data: this.dataEntrante
+      data: this.dataEntrante,
+      cantidad: this.cantidad
     });
   }
   
