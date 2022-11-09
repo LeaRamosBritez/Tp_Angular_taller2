@@ -18,13 +18,6 @@ export class PerfilUsuarioComponent implements OnInit {
     usuario: string;
     emailVerificado: boolean;
 
-    
-
-  poolData = {
-    UserPoolId: environment.UserPoolId,
-    ClientId: environment.ClientId, 
-  };
-
   attributes:CognitoUserAttribute[];
 
 
@@ -38,7 +31,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
 
   getAttributes():void{
-
+  /*
     let i:number;
     var userPool = new CognitoUserPool(this.poolData);
     var cognitoCurrentUser = userPool.getCurrentUser();
@@ -102,7 +95,7 @@ export class PerfilUsuarioComponent implements OnInit {
       });
     });
 
-
+    */
   }
 
 }

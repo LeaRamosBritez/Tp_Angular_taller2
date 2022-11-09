@@ -4,6 +4,8 @@ import { Iuser } from '../models/iuser';
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
 import { Message } from 'primeng/api';
+import { UsuarioService } from '../services/usuario.service';
+import { NavComponent } from '../nav/nav.component';
 
 
 @Component({
@@ -17,9 +19,9 @@ export class LoginComponent implements OnInit {
 
   email: string;
   password: string;
+  usuarioLogueado: Iuser;
 
-
-  constructor(private router: Router) { }
+  constructor(private router: Router,private usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
     this.msgs1 = [
@@ -28,42 +30,26 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void{
+    var iuser: Iuser = {
+      email: this.email,
+      name: null,
+      family_name: null,
+      address: null,
+      nickname: null,
+      pass: this.password
+    }
 
-        //datos de grupo (pool)
-        var poolData = {
-          UserPoolId: environment.UserPoolId, // Your user pool id here
-          ClientId: environment.ClientId, // Your client id here
-        };
-    
-        var userPool = new CognitoUserPool(poolData);
-    
-        // datos del user
-        var userData = {
-          Username: this.email,
-          Pool: userPool,
-        };
-    
-        var cognitoUser = new CognitoUser(userData);
-        // credenciales
-        var authenticationData = {
-          Username: this.email,
-          Password: this.password,
-        };
-    
-        var authenticationDetails = new AuthenticationDetails(authenticationData);
-    
-        //login
-        cognitoUser.authenticateUser(authenticationDetails, {
-          onSuccess: (result) => {
-            console.log('access token + ' + result.getAccessToken().getJwtToken());
-            this.router.navigate(['/']);
-          },
-    
-          onFailure: (err) => {
-            alert(err.message || JSON.stringify(err));
+    this.usuarioService.loginUsuario(iuser).subscribe( (dato: Iuser) => {});
 
-            this.router.navigate(['/signup']);
-          }
-        },);
+    this.usuarioService.usuarioActual().subscribe((dato: Iuser) => {
+        /*localStorage.setItem('usuario', JSON.stringify(dato)); 
+        environment.currentUser=true;*/
+        this.usuarioLogueado = dato;
+
+    });
+
+   alert(this.usuarioLogueado);
+   
+    //this.router.navigate(['/home']);
   }
 }

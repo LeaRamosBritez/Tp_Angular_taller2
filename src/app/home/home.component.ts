@@ -19,10 +19,6 @@ export class HomeComponent implements OnInit {
   visibleSidebar5: any;
   userCurrent:Boolean = false;
 
-  poolData = {
-    UserPoolId: environment.UserPoolId,
-    ClientId: environment.ClientId, 
-  };
 
   constructor(private RestService:RestService,private router: Router) { }
 
@@ -30,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarData();
-
+    this.userCurrent=environment.currentUser;
     this.listaProductos= [
       {
         id:1,
@@ -65,36 +61,5 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  
 
-
-   getAttributesCurretUser(): void {
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-
-    if (cognitoCurrentUser != null) {
-
-      //Primero se verifica la session 
-      cognitoCurrentUser.getSession((err:any, session:any) => {
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-        console.log('session Validada: ' + session.isValid());
-
-        //Segundo se verifica los atributos del usuario
-        cognitoCurrentUser.getUserAttributes((err, attributes) => {
-          if (err) {
-            alert(err.message || JSON.stringify(err));
-            return;
-          }
-
-          this.attributeList = attributes;
-
-          this.attributeList.forEach((attribute) => console.log(attribute.getName() + ' =' + attribute.getValue()));
-          
-        });
-      });
-    }
- }
 }

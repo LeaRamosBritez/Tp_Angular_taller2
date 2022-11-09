@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
+import { UsuarioService } from './usuario.service';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ export class AuthService {
 
   constructor() { }
 
-  isAuth():boolean{
+  isAuth():boolean{/*
     var isAuth = false;
     var poolData = {
       UserPoolId: environment.UserPoolId,
@@ -29,8 +30,8 @@ export class AuthService {
         isAuth = session.isValid();
       });
 
-    }
+    }*/
     
-    return isAuth;
+    return environment.currentUser;
   }
 }

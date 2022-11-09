@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { MenuItem, MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
+import { Iuser } from '../models/iuser';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 
 export class NavComponent implements OnInit {
-
+  userlogueado: Iuser;
   
   address : string;
   nombre: string ;
@@ -19,36 +21,39 @@ export class NavComponent implements OnInit {
   email: string;
   usuario: string;
   emailVerificado: boolean;
-
-
-  poolData = {
-    UserPoolId: environment.UserPoolId,
-    ClientId: environment.ClientId, 
-  };
-
-  public listaProductos:any = [];
-
+  local: any = []
+  listaProductos:any = [];
   selectedProduct: any;
-
-  attributes:CognitoUserAttribute[];
-
-
   display: any;
-  userCurrent:Boolean = false;
+  userCurrent:Boolean;
   items: MenuItem[];
 
-
-
-  constructor(private router:Router) { }
+  constructor(private router:Router,private usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
+
+    this.local=JSON.parse(localStorage.getItem('usuario')); 
+    if(this.local != null && this.local != undefined){
+      environment.currentUser = true;
+      this.userCurrent=environment.currentUser;
+      this.address = this.local.address;
+      this.nombre = this.local.name;
+      this.apellido = this.local.family_name;
+      this.email = this.local.email;
+      this.usuario = this.local.nickname;
+      this.emailVerificado = this.local.email_verified;
+    }else{
+      environment.currentUser = false;
+      this.userCurrent=environment.currentUser;
+    }
+
+
     this.items = [{
       label: 'Optiones',
       items: [{
           label: 'Perfil',
           icon: 'pi pi-user',
           command: () => {
-              //this.getAttributes();
               this.router.navigate(['/perfil'])
           }
       },
@@ -112,105 +117,17 @@ export class NavComponent implements OnInit {
     }
   ]
 
-
-    this.getUserCurrentUser();
-
-    this.getAttributes();
-  }
-
-
-  getUserCurrentUser():void {
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    if (cognitoCurrentUser != null) {
-      this.userCurrent = true;
-      console.log('Usuario logueado: '+ this.userCurrent);
-    }else{
-      this.userCurrent = false;
-      console.log('Usuario logueado: '+ this.userCurrent);
-    }
-
   }
 
   logout(): void{
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    if (cognitoCurrentUser != null) {
-      cognitoCurrentUser.signOut();
-      localStorage.removeItem('token');
-      this.router.navigate(['/home']);
-    }else{
-      alert('No hay usuario logueado');
-      this.router.navigate(['/login']);
-    }
-  }
-
-  getAttributes():void{
-
-    let i:number;
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    
-    cognitoCurrentUser.getSession((err: any, session : any) => {
-      if (err) {
-        alert(err.message || JSON.stringify(err));
-        return;
-      }
-      cognitoCurrentUser.getUserAttributes((err, result) =>{
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-
-         this.attributes = result;
-
-
-        for(  i  =  0 ;  i  <  this.attributes . length ;  i ++ ){
-          if(this.attributes[i].getName () != 'sub'){
-            
-            switch(this.attributes[i].getName()){
-
-              case 'address' : 
-              this.address= this.attributes[i]. getValue();
-                break;
-              
-              case 'name' : 
-                this.nombre = this.attributes[i].getValue();
-                  break;
-              
-              case 'nickname':
-                this.usuario = this.attributes[i].getValue();
-                  break;
-                
-              case 'family_name' :
-                this.apellido = this.attributes[i].getValue();
-                  break;
-              
-              case 'email_verified':
-                this.emailVerificado = true;
-                  break;
-
-              case 'email':
-                  this.email = this.attributes[i].getValue();
-                    break;
-
-            }
-            
-            
-            
-            //this.attributes.forEach((Attr : CognitoUserAttribute) => console.log(Attr.Name + ' = ' + Attr.Value));
-            console .log ( 
-             this.attributes [ i ] . getName ( )  +  '= '  + this.attributes [ i ] . getValue ( ) 
-             ) ; 
-
-          }
-        }
-       
-        
-      });
+    localStorage.removeItem('usuario');
+    localStorage.clear();
+    environment.currentUser = false;
+    this.userCurrent=environment.currentUser;
+    this.usuarioService.logout().subscribe( (resp:any)=>{
     });
-
-
+    this.router.navigate(['/login']);
   }
+
   
 }

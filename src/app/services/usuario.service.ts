@@ -20,8 +20,8 @@ export class UsuarioService {
     return this.httpClient.post(`${this.baseUrl}/login`, usuario);
   }
 
-  usuarioActual(){
-    return this.httpClient.get(`${this.baseUrl}/usuarioActual`);
+  usuarioActual(): Observable<Iuser>{
+    return this.httpClient.get<Iuser>(`${this.baseUrl}/usuarioActual`);
   }
 
   logout(): any {
