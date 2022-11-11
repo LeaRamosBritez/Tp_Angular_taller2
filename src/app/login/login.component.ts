@@ -6,12 +6,14 @@ import { environment } from 'src/environments/environment';
 import { Message } from 'primeng/api';
 import { UsuarioService } from '../services/usuario.service';
 import { NavComponent } from '../nav/nav.component';
+import { finalize, take, tap } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
 
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
   password: string;
   usuarioLogueado: Iuser;
 
-  constructor(private router: Router,private usuarioService:UsuarioService) { }
+  constructor(private router: Router,private usuarioService:UsuarioService,private cookies: CookieService) { }
 
   ngOnInit(): void {
     this.msgs1 = [
@@ -39,17 +41,22 @@ export class LoginComponent implements OnInit {
       pass: this.password
     }
 
-    this.usuarioService.loginUsuario(iuser).subscribe( (dato: Iuser) => {});
-
-    this.usuarioService.usuarioActual().subscribe((dato: Iuser) => {
-        /*localStorage.setItem('usuario', JSON.stringify(dato)); 
-        environment.currentUser=true;*/
-        this.usuarioLogueado = dato;
-
+    this.usuarioService.loginUsuario(iuser).subscribe(() => {
+      alert('Usuario logueado correctamente');
     });
-
-   alert(this.usuarioLogueado);
    
-    //this.router.navigate(['/home']);
+    this.usuarioService.usuarioActual().pipe(
+      take(1),
+      finalize(() => this.router.navigate(['/home']))
+    ).subscribe((data: Iuser) => { localStorage.setItem('usuarioActual', JSON.stringify(data)); });
+
+  }
+  guardarUsuario(){
+    this.usuarioService.usuarioActual().subscribe((data: Iuser) => {
+      localStorage.setItem('usuarioActual', JSON.stringify(data));
+      this.cookies.set('usuarioActual', JSON.stringify(data));
+    });
   }
 }
+
+

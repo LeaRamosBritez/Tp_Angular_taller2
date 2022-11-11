@@ -5,7 +5,7 @@
     </a>
 
     <div *ngIf="!userCurrent" class="col-md-3 text-center">
-      <p>{{userCurrent}}</p>
+      
       <button type="button" class="btn btn-login" routerLink="/login" routerLinkActive="active">Login</button>
       <button type="button" class="btn b-sign-up" routerLink="/signup" routerLinkActive="active">Sign-up</button>
     </div>
@@ -15,7 +15,7 @@
       <app-carrito></app-carrito>
 
       <p-menu #menu [popup]="true" [model]="items"></p-menu>
-      <button class="bg-white mb-2 border-0" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="{{local.name}} {{local.family_name}}" (click)="menu.toggle($event)"></button>
+      <button class="bg-white mb-2 border-0" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="{{nombre}} {{apellido}}" (click)="menu.toggle($event)"></button>
     
     </div>
   </div>

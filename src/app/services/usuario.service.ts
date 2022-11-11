@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Iuser } from '../models/iuser';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,11 @@ export class UsuarioService {
     return this.httpClient.post(`${this.baseUrl}/registrarUsuario`, usuario);
   }
 
-  loginUsuario(usuario: Iuser): any {
-    return this.httpClient.post(`${this.baseUrl}/login`, usuario);
+  loginUsuario(usuario: Iuser): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}/login`, usuario,{ observe: 'events' }).pipe(tap(
+      (res: any) => {
+        return res;
+      }));
   }
 
   usuarioActual(): Observable<Iuser>{
@@ -27,4 +31,5 @@ export class UsuarioService {
   logout(): any {
     return this.httpClient.post(`${this.baseUrl}/logout`,null);
   }
+
 }

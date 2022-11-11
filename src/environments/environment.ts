@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  currentUser:false
+  usuarioGlobla: false,
 };
 
 /*

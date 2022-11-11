@@ -21,7 +21,7 @@ export class LoginGuard implements CanActivate {
     
       var isAuth = this.authService.isAuth();
 
-      if(environment.currentUser){
+      if(isAuth){
         this.router.navigate(['/home']);
 
         return false;

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { CookieService } from 'ngx-cookie-service';
 import { MenuItem, MessageService } from 'primeng/api';
+import { finalize, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Iuser } from '../models/iuser';
 import { UsuarioService } from '../services/usuario.service';
@@ -14,120 +16,124 @@ import { UsuarioService } from '../services/usuario.service';
 
 export class NavComponent implements OnInit {
   userlogueado: Iuser;
-  
+  userCurrent:Boolean;
+
   address : string;
   nombre: string ;
   apellido: string;
   email: string;
   usuario: string;
   emailVerificado: boolean;
+
   local: any = []
   listaProductos:any = [];
   selectedProduct: any;
   display: any;
-  userCurrent:Boolean;
+  
   items: MenuItem[];
 
-  constructor(private router:Router,private usuarioService:UsuarioService) { }
+  constructor(private router:Router,private usuarioService:UsuarioService, private cookie:CookieService) { }
 
   ngOnInit(): void {
-
-    this.local=JSON.parse(localStorage.getItem('usuario')); 
-    if(this.local != null && this.local != undefined){
-      environment.currentUser = true;
-      this.userCurrent=environment.currentUser;
-      this.address = this.local.address;
-      this.nombre = this.local.name;
-      this.apellido = this.local.family_name;
-      this.email = this.local.email;
-      this.usuario = this.local.nickname;
-      this.emailVerificado = this.local.email_verified;
-    }else{
-      environment.currentUser = false;
-      this.userCurrent=environment.currentUser;
-    }
+    this.usuarioService.usuarioActual().pipe( tap( (response) => {
+      this.userCurrent = true;
+      this.email = response.email;
+      this.nombre = response.name;
+      this.apellido = response.family_name;
+      this.usuario = response.nickname;
+      this.address = response.address;
+      this.emailVerificado = true;
+    })).subscribe((data: Iuser) => {
+      this.router.navigate(['/home']);
+    });
 
 
     this.items = [{
-      label: 'Optiones',
-      items: [{
-          label: 'Perfil',
-          icon: 'pi pi-user',
-          command: () => {
-              this.router.navigate(['/perfil'])
-          }
-      },
-      {
-          label: 'Configuración',
-          icon: 'pi pi-cog',
-          command: () => {
-            
-          }
-      },
-      {
-          label: 'Administrador',
-          icon: 'fa-regular fa-star',
-          command: () => {
-            this.router.navigate(['/administrador'])
-          }
-      }
-      ]},
-      {
-          label: 'Navegación',
-          items: [{
-              label: 'Sign out',
-              icon: 'pi pi-sign-out',
-              command: () => {
-                this.logout();
-                
-              }
-          }
-      ]}
-  ];
+        label: 'Optiones',
+        items: [{
+            label: 'Perfil',
+            icon: 'pi pi-user',
+            command: () => {
+                this.router.navigate(['/perfil'])
+            }
+        },
+        {
+            label: 'Configuración',
+            icon: 'pi pi-cog',
+            command: () => {
+              
+            }
+        },
+        {
+            label: 'Administrador',
+            icon: 'fa-regular fa-star',
+            command: () => {
+              this.router.navigate(['/administrador'])
+            }
+        }
+        ]},
+        {
+            label: 'Navegación',
+            items: [{
+                label: 'Sign out',
+                icon: 'pi pi-sign-out',
+                command: () => {
+                  this.logout();
+                  
+                }
+            }
+        ]}
+    ];
 
-  this.listaProductos= [
-    {
-      nombre:'Queso',
-      precio: '300',
-      imagen:'queso.jpg'
-    },
-    {
-      nombre:'Fideos',
-      precio: '120',
-      imagen:'fideos.png'
-    },
-    {
-      nombre:'Arroz',
-      precio: '90',
-      imagen:'arroz.png'
-    },    {
-      nombre:'Queso',
-      precio: '300',
-      imagen:'queso.jpg'
-    },
-    {
-      nombre:'Fideos',
-      precio: '120',
-      imagen:'fideos.png'
-    },
-    {
-      nombre:'Arroz',
-      precio: '90',
-      imagen:'arroz.png'
-    }
-  ]
+    this.listaProductos= [
+      {
+        nombre:'Queso',
+        precio: '300',
+        imagen:'queso.jpg'
+      },
+      {
+        nombre:'Fideos',
+        precio: '120',
+        imagen:'fideos.png'
+      },
+      {
+        nombre:'Arroz',
+        precio: '90',
+        imagen:'arroz.png'
+      },    {
+        nombre:'Queso',
+        precio: '300',
+        imagen:'queso.jpg'
+      },
+      {
+        nombre:'Fideos',
+        precio: '120',
+        imagen:'fideos.png'
+      },
+      {
+        nombre:'Arroz',
+        precio: '90',
+        imagen:'arroz.png'
+      }
+    ]
 
   }
 
   logout(): void{
-    localStorage.removeItem('usuario');
-    localStorage.clear();
-    environment.currentUser = false;
-    this.userCurrent=environment.currentUser;
-    this.usuarioService.logout().subscribe( (resp:any)=>{
-    });
-    this.router.navigate(['/login']);
+
+    this.usuarioService.logout().pipe(finalize(() => {
+      this.userCurrent = false;
+      localStorage.removeItem('usuarioActual');
+      localStorage.clear();
+      this.cookie.deleteAll();
+      this.router.navigate(['/login']);
+    })).subscribe( (resp:any)=>{
+    }); 
   }
 
-  
+  guardarUsuario(){
+    this.usuarioService.usuarioActual().subscribe((data: Iuser) => {
+      localStorage.setItem('usuarioActual', JSON.stringify(data));
+    });
+  }
 }

@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { environment } from 'src/environments/environment';
-
+import { Iuser } from '../models/iuser';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,7 @@ export class HomeComponent implements OnInit {
   
   attributeList: CognitoUserAttribute[];
   visibleSidebar5: any;
-  userCurrent:Boolean = false;
+  userCurrent:Boolean;
 
 
   constructor(private RestService:RestService,private router: Router) { }
@@ -25,8 +24,8 @@ export class HomeComponent implements OnInit {
   public listaProductos:any = [];
 
   ngOnInit(): void {
+    
     this.cargarData();
-    this.userCurrent=environment.currentUser;
     this.listaProductos= [
       {
         id:1,

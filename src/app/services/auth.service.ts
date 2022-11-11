@@ -11,11 +11,11 @@ export class AuthService {
 
   constructor() { }
 
-  isAuth():boolean{/*
+  isAuth():boolean{
     var isAuth = false;
     var poolData = {
-      UserPoolId: environment.UserPoolId,
-      ClientId: environment.ClientId, 
+      UserPoolId: "us-east-1_mAolZ5VrD",
+      ClientId: "2agsnegmb1t54jjnvofdsk4n2l"
     };
 
     var userPool = new CognitoUserPool(poolData);
@@ -30,8 +30,8 @@ export class AuthService {
         isAuth = session.isValid();
       });
 
-    }*/
+    }
     
-    return environment.currentUser;
+    return isAuth;
   }
 }
