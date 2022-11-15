@@ -11,10 +11,10 @@ import { SignupComponent } from './signup/signup.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'signup', component: SignupComponent, canActivate: [LoginGuard]  },
-  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'perfil', component : PerfilUsuarioComponent , canActivate: [HomeGuard]},
-  { path: 'administrador', component : AdministradorComponent , canActivate: [HomeGuard]},
+  { path: 'signup', component: SignupComponent, /*canActivate: [LoginGuard]*/  },
+  { path: 'login', component: LoginComponent, /*canActivate: [LoginGuard]*/},
+  { path: 'perfil', component : PerfilUsuarioComponent , /*canActivate: [HomeGuard]*/},
+  { path: 'administrador', component : AdministradorComponent ,/* canActivate: [HomeGuard]*/},
   { path: '**', redirectTo: '/home' }
 ];
 
