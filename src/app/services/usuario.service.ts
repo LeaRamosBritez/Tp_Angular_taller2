@@ -28,6 +28,10 @@ export class UsuarioService {
     return this.httpClient.get<Iuser>(`${this.baseUrl}/usuarioActual`);
   }
 
+  obtenerUsuarioPorEmail(mail:String): Observable<Iuser>{
+    return this.httpClient.get<Iuser>(`${this.baseUrl}/obtenerUsuarioPorEmail/${mail}`);
+  }
+
   logout(): any {
     return this.httpClient.post(`${this.baseUrl}/logout`,null);
   }
