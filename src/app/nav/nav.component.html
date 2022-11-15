@@ -5,6 +5,7 @@
     </a>
 
     <div *ngIf="!userCurrent" class="col-md-3 text-center">
+      
       <button type="button" class="btn btn-login" routerLink="/login" routerLinkActive="active">Login</button>
       <button type="button" class="btn b-sign-up" routerLink="/signup" routerLinkActive="active">Sign-up</button>
     </div>
@@ -17,7 +18,5 @@
       <button class="bg-white mb-2 border-0" style="color: #22312b;" type="button" pButton icon="pi pi-user" label="{{nombre}} {{apellido}}" (click)="menu.toggle($event)"></button>
     
     </div>
-
-
   </div>
 </nav>

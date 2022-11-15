@@ -68,20 +68,6 @@ export class AdministradorComponent implements OnInit {
   }
 
 
-
-  deleteProduct(producto: Producto) {
-    /*this.confirmationService.confirm({
-        message: 'Are you sure you want to delete ' + product.name + '?',
-        header: 'Confirm',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            this.products = this.products.filter(val => val.id !== product.id);
-            this.product = {};
-            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
-        }
-    });*/
-  }
-
   hideDialog() {
     this.diagoloProducto = false;
     this.submitted = false;

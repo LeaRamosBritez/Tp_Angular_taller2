@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  UserPoolId: "us-east-1_mAolZ5VrD",
-  ClientId:"2agsnegmb1t54jjnvofdsk4n2l"
+  usuarioGlobla: false,
 };
 
 /*

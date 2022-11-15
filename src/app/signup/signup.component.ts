@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Iuser } from '../models/iuser';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,51 +18,26 @@ export class SignupComponent implements OnInit {
   address:string;
   nickname: string;
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private usuarioService:UsuarioService ) { }
 
   ngOnInit(): void {
   }
 
   onRegistrer(): void{
-    var poolData = {
-      UserPoolId: environment.UserPoolId,
-      ClientId: environment.ClientId,
-    };
-
-    var userPool = new CognitoUserPool(poolData);
-
-    var attributeList = [];
-
     var iuser: Iuser = {
       email: this.email,
       name: this.name,
       family_name: this.family_name,
       address: this.address,
-      nickname: this.nickname
+      nickname: this.nickname,
+      pass: this.password
     }
 
-    for (let key in iuser) {
-      var attributeData = {
-        Name: key,
-        Value: iuser[key]
+    this.usuarioService.registrarUsuario(iuser).subscribe((dato: Iuser) => {
+      if(dato){
+        alert("Usuario registrado correctamente. Verifique su correo para activar su cuenta.");
+        this.router.navigate(['/login']);
       }
-      var attribute = new CognitoUserAttribute(attributeData);
-      attributeList.push(attribute);
-    }
-
-    userPool.signUp(this.email, this.password, attributeList, [],(err, result)=> {
-      if (err) {
-        alert(err || JSON.stringify(err));
-        return;
-      }
-      var cognitoUser = result.user;
-      console.log(JSON.stringify(cognitoUser));
-
-      alert('Correo enviado para acticar tu cuenta');
-
-      this.router.navigate(['/login']);
     });
-
-
   }
 }

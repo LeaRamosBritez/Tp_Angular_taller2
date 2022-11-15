@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { CookieService } from 'ngx-cookie-service';
 import { MenuItem, MessageService } from 'primeng/api';
+import { finalize, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Iuser } from '../models/iuser';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,8 +15,9 @@ import { environment } from 'src/environments/environment';
 })
 
 export class NavComponent implements OnInit {
+  userlogueado: Iuser;
+  userCurrent:Boolean;
 
-  
   address : string;
   nombre: string ;
   apellido: string;
@@ -20,197 +25,115 @@ export class NavComponent implements OnInit {
   usuario: string;
   emailVerificado: boolean;
 
-
-  poolData = {
-    UserPoolId: environment.UserPoolId,
-    ClientId: environment.ClientId, 
-  };
-
-  public listaProductos:any = [];
-
+  local: any = []
+  listaProductos:any = [];
   selectedProduct: any;
-
-  attributes:CognitoUserAttribute[];
-
-
   display: any;
-  userCurrent:Boolean = false;
+  
   items: MenuItem[];
 
-
-
-  constructor(private router:Router) { }
+  constructor(private router:Router,private usuarioService:UsuarioService, private cookie:CookieService) { }
 
   ngOnInit(): void {
-    this.items = [{
-      label: 'Optiones',
-      items: [{
-          label: 'Perfil',
-          icon: 'pi pi-user',
-          command: () => {
-              //this.getAttributes();
-              this.router.navigate(['/perfil'])
-          }
-      },
-      {
-          label: 'Configuración',
-          icon: 'pi pi-cog',
-          command: () => {
-            
-          }
-      },
-      {
-          label: 'Administrador',
-          icon: 'fa-regular fa-star',
-          command: () => {
-            this.router.navigate(['/administrador'])
-          }
-      }
-      ]},
-      {
-          label: 'Navegación',
-          items: [{
-              label: 'Sign out',
-              icon: 'pi pi-sign-out',
-              command: () => {
-                this.logout();
-                
-              }
-          }
-      ]}
-  ];
-
-  this.listaProductos= [
-    {
-      nombre:'Queso',
-      precio: '300',
-      imagen:'queso.jpg'
-    },
-    {
-      nombre:'Fideos',
-      precio: '120',
-      imagen:'fideos.png'
-    },
-    {
-      nombre:'Arroz',
-      precio: '90',
-      imagen:'arroz.png'
-    },    {
-      nombre:'Queso',
-      precio: '300',
-      imagen:'queso.jpg'
-    },
-    {
-      nombre:'Fideos',
-      precio: '120',
-      imagen:'fideos.png'
-    },
-    {
-      nombre:'Arroz',
-      precio: '90',
-      imagen:'arroz.png'
-    }
-  ]
-
-
-    this.getUserCurrentUser();
-
-    this.getAttributes();
-  }
-
-
-  getUserCurrentUser():void {
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    if (cognitoCurrentUser != null) {
+    this.usuarioService.usuarioActual().pipe( tap( (response) => {
       this.userCurrent = true;
-      console.log('Usuario logueado: '+ this.userCurrent);
-    }else{
-      this.userCurrent = false;
-      console.log('Usuario logueado: '+ this.userCurrent);
-    }
+      this.email = response.email;
+      this.nombre = response.name;
+      this.apellido = response.family_name;
+      this.usuario = response.nickname;
+      this.address = response.address;
+      this.emailVerificado = true;
+    })).subscribe((data: Iuser) => {
+      this.router.navigate(['/home']);
+    });
+
+
+    this.items = [{
+        label: 'Optiones',
+        items: [{
+            label: 'Perfil',
+            icon: 'pi pi-user',
+            command: () => {
+                this.router.navigate(['/perfil'])
+            }
+        },
+        {
+            label: 'Configuración',
+            icon: 'pi pi-cog',
+            command: () => {
+              
+            }
+        },
+        {
+            label: 'Administrador',
+            icon: 'fa-regular fa-star',
+            command: () => {
+              this.router.navigate(['/administrador'])
+            }
+        }
+        ]},
+        {
+            label: 'Navegación',
+            items: [{
+                label: 'Sign out',
+                icon: 'pi pi-sign-out',
+                command: () => {
+                  this.logout();
+                  
+                }
+            }
+        ]}
+    ];
+
+    this.listaProductos= [
+      {
+        nombre:'Queso',
+        precio: '300',
+        imagen:'queso.jpg'
+      },
+      {
+        nombre:'Fideos',
+        precio: '120',
+        imagen:'fideos.png'
+      },
+      {
+        nombre:'Arroz',
+        precio: '90',
+        imagen:'arroz.png'
+      },    {
+        nombre:'Queso',
+        precio: '300',
+        imagen:'queso.jpg'
+      },
+      {
+        nombre:'Fideos',
+        precio: '120',
+        imagen:'fideos.png'
+      },
+      {
+        nombre:'Arroz',
+        precio: '90',
+        imagen:'arroz.png'
+      }
+    ]
 
   }
 
   logout(): void{
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    if (cognitoCurrentUser != null) {
-      cognitoCurrentUser.signOut();
-      localStorage.removeItem('token');
-      this.router.navigate(['/home']);
-    }else{
-      alert('No hay usuario logueado');
+
+    this.usuarioService.logout().pipe(finalize(() => {
+      this.userCurrent = false;
+      localStorage.removeItem('usuarioActual');
+      localStorage.clear();
+      this.cookie.deleteAll();
       this.router.navigate(['/login']);
-    }
+    })).subscribe( (resp:any)=>{
+    }); 
   }
 
-  getAttributes():void{
-
-    let i:number;
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    
-    cognitoCurrentUser.getSession((err: any, session : any) => {
-      if (err) {
-        alert(err.message || JSON.stringify(err));
-        return;
-      }
-      cognitoCurrentUser.getUserAttributes((err, result) =>{
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-
-         this.attributes = result;
-
-
-        for(  i  =  0 ;  i  <  this.attributes . length ;  i ++ ){
-          if(this.attributes[i].getName () != 'sub'){
-            
-            switch(this.attributes[i].getName()){
-
-              case 'address' : 
-              this.address= this.attributes[i]. getValue();
-                break;
-              
-              case 'name' : 
-                this.nombre = this.attributes[i].getValue();
-                  break;
-              
-              case 'nickname':
-                this.usuario = this.attributes[i].getValue();
-                  break;
-                
-              case 'family_name' :
-                this.apellido = this.attributes[i].getValue();
-                  break;
-              
-              case 'email_verified':
-                this.emailVerificado = true;
-                  break;
-
-              case 'email':
-                  this.email = this.attributes[i].getValue();
-                    break;
-
-            }
-            
-            
-            
-            //this.attributes.forEach((Attr : CognitoUserAttribute) => console.log(Attr.Name + ' = ' + Attr.Value));
-            console .log ( 
-             this.attributes [ i ] . getName ( )  +  '= '  + this.attributes [ i ] . getValue ( ) 
-             ) ; 
-
-          }
-        }
-       
-        
-      });
+  guardarUsuario(){
+    this.usuarioService.usuarioActual().subscribe((data: Iuser) => {
+      localStorage.setItem('usuarioActual', JSON.stringify(data));
     });
-
-
   }
-  
 }
