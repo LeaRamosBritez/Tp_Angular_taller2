@@ -50,7 +50,7 @@ El carrito de compras está vacío.
         <th pSortableColumn="price">Cantidad <p-sortIcon field="price"></p-sortIcon>
         </th>
         <!-- <th>Cantidad</th> -->
-        <th></th>
+        <th>Subtotal</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-product let-rowIndex="rowIndex">
@@ -58,22 +58,26 @@ El carrito de compras está vacío.
         <td>{{product.data.nombre}}</td>
         <td><img [src]="product?.data?.img" [alt]="product.imagen" height="100" width="100"
             class="product-image" /></td>
-        <td>{{product.data.precio}}</td>
+        <td>{{product.data.precio | currency}}</td>
         <td>{{product.cantidad}}</td>
+        <td>{{product.cantidad * product.data.precio | currency}}</td>
+        
         <!-- <td>x1</td> -->
         <td>
           <button class="btn btn-danger" (click)="eliminarDelCarrito(rowIndex)">Eliminar producto</button>
         </td>
       </tr>
+      
+      
     </ng-template>
     
 
-      
-
+   
   </p-table>
-  <p class="bg-success fw-bold d-flex justify-content-around"> <span class="text-start bg-info">Subtotal:</span> 
+  
 
-
+  <p class="bg-success fw-bold d-flex justify-content-around" > <span class="text-start bg-info">Total: {{total | currency}} </span> 
+   
   <div *ngIf="listaProductosEnCarrito.length===0; else elseBlock">
     El carrito de compras está vacío.
     </div>

@@ -13,7 +13,8 @@ export class CarritoComponent implements OnInit {
   selectedProduct: any;
   display: any;
   public listaProductosEnCarrito:Array<any> = [];
-
+  public total=0;
+  subtotal=0;
   alertSwitch:boolean;
 
   ngOnInit(): void {
@@ -24,9 +25,17 @@ export class CarritoComponent implements OnInit {
       const idProductoEntrante = data.data.id;
       if (!this.listaProductosEnCarrito.find(p => p.data.id === idProductoEntrante)){
         this.listaProductosEnCarrito.push(data);
+        console.log(data.cantidad * data.data.precio );
+        console.log(this.listaProductosEnCarrito.length)
+        this.subtotal = data.cantidad * data.data.precio;
+        this.total=this.total + this.subtotal;
+        console.log(this.total);
       } 
+     
     })
   }
+
+ 
 
   eliminarDelCarrito(index:any){
 
@@ -39,9 +48,10 @@ export class CarritoComponent implements OnInit {
     .subscribe(respuesta => {
       console.log(respuesta);
     });
-
+    console.log("Total: ", this.total)
     this.listaProductosEnCarrito = [];
     this.alertSwitch = true;
+
   }
 
   cerrarAlert(){
