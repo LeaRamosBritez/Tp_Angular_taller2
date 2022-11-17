@@ -49,7 +49,10 @@ export class LoginComponent implements OnInit {
       take(1),
       finalize(() => this.router.navigate(['/home']))
     ).subscribe((data: Iuser) => { localStorage.setItem('usuarioActual', JSON.stringify(data)); });
-
+    
+    console.log('se logeo el usuario se logeo el usuario');
+    this.router.navigate(['/home']);
+    window.location.reload();
   }
   guardarUsuario(){
     this.usuarioService.usuarioActual().subscribe((data: Iuser) => {

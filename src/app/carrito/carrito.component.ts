@@ -51,7 +51,7 @@ export class CarritoComponent implements OnInit {
     console.log("Total: ", this.total)
     this.listaProductosEnCarrito = [];
     this.alertSwitch = true;
-
+    this.total=0;
   }
 
   cerrarAlert(){
