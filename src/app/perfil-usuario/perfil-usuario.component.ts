@@ -11,17 +11,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./perfil-usuario.component.scss']
 })
 export class PerfilUsuarioComponent implements OnInit {
-    address : string;
-    nombre: string ;
-    apellido: string;
-    email: string;
-    usuario: string;
-    emailVerificado: boolean;
-
-  attributes:CognitoUserAttribute[];
-
-
-
+  address : string;
+  nombre: string ;
+  apellido: string;
+  email: string;
+  usuario: string;
+  emailVerificado: boolean;
+  attributes: any;
 
   constructor(private router:Router) { }
 
@@ -29,73 +25,14 @@ export class PerfilUsuarioComponent implements OnInit {
     this.getAttributes();
   }
 
-
   getAttributes():void{
-  /*
-    let i:number;
-    var userPool = new CognitoUserPool(this.poolData);
-    var cognitoCurrentUser = userPool.getCurrentUser();
-    
-    cognitoCurrentUser.getSession((err: any, session : any) => {
-      if (err) {
-        alert(err.message || JSON.stringify(err));
-        return;
-      }
-      cognitoCurrentUser.getUserAttributes((err, result) =>{
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-
-         this.attributes = result;
-
-
-        for(  i  =  0 ;  i  <  this.attributes . length ;  i ++ ){
-          if(this.attributes[i].getName () != 'sub'){
-            
-            switch(this.attributes[i].getName()){
-
-              case 'address' : 
-              this.address= this.attributes[i]. getValue();
-                break;
-              
-              case 'name' : 
-                this.nombre = this.attributes[i].getValue();
-                  break;
-              
-              case 'nickname':
-                this.usuario = this.attributes[i].getValue();
-                  break;
-                
-              case 'family_name' :
-                this.apellido = this.attributes[i].getValue();
-                  break;
-              
-              case 'email_verified':
-                this.emailVerificado = true;
-                  break;
-
-              case 'email':
-                  this.email = this.attributes[i].getValue();
-                    break;
-
-            }
-            
-            
-            
-            //this.attributes.forEach((Attr : CognitoUserAttribute) => console.log(Attr.Name + ' = ' + Attr.Value));
-            console .log ( 
-             this.attributes [ i ] . getName ( )  +  '= '  + this.attributes [ i ] . getValue ( ) 
-             ) ; 
-
-          }
-        }
-       
-        
-      });
-    });
-
-    */
+    this.attributes = JSON.parse(localStorage.getItem('usuarioActual'));
+    this.email=this.attributes[0]['email'];
+    this.nombre=this.attributes[0]['name'];
+    this.apellido=this.attributes[0]['family_name'];
+    this.address=this.attributes[0]['address'];
+    this.usuario=this.attributes[0]['nickname'];
+    this.emailVerificado=true;
   }
 
 }

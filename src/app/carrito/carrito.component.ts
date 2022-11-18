@@ -39,6 +39,10 @@ export class CarritoComponent implements OnInit {
 
   eliminarDelCarrito(index:any){
 
+    let precioAborrar = this.listaProductosEnCarrito[index].data.precio*this.listaProductosEnCarrito[index].cantidad;
+    console.log(precioAborrar);
+    this.total = this.total - precioAborrar;
+    console.log(this.total);
     this.listaProductosEnCarrito.splice(index, 1);
   }
 

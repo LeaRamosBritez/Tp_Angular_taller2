@@ -44,21 +44,20 @@ export class LoginComponent implements OnInit {
     this.usuarioService.loginUsuario(iuser).subscribe(() => {
       alert('Usuario logueado correctamente');
     });
-   
-    this.usuarioService.usuarioActual().pipe(
-      take(1),
-      finalize(() => this.router.navigate(['/home']))
-    ).subscribe((data: Iuser) => { localStorage.setItem('usuarioActual', JSON.stringify(data)); });
     
+    this.guardarUsuarioAlLocalStorage(this.email);
+
     console.log('se logeo el usuario se logeo el usuario');
     this.router.navigate(['/home']);
     window.location.reload();
   }
-  guardarUsuario(){
-    this.usuarioService.usuarioActual().subscribe((data: Iuser) => {
+  guardarUsuarioAlLocalStorage(email : String){
+    this.usuarioService.obtenerUsuarioPorEmail(email).subscribe((data: Iuser) => {
       localStorage.setItem('usuarioActual', JSON.stringify(data));
       this.cookies.set('usuarioActual', JSON.stringify(data));
+      alert('Usuario guardado en el local storage');
     });
+
   }
 }
 

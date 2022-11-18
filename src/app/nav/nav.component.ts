@@ -24,7 +24,7 @@ export class NavComponent implements OnInit {
   email: string;
   usuario: string;
   emailVerificado: boolean;
-
+   aValue:any;
   local: any = []
   listaProductos:any = [];
   selectedProduct: any;
@@ -35,6 +35,21 @@ export class NavComponent implements OnInit {
   constructor(private router:Router,private usuarioService:UsuarioService, private cookie:CookieService) { }
 
   ngOnInit(): void {
+
+    if(localStorage.getItem('usuarioActual') != null){
+      this.aValue = JSON.parse(localStorage.getItem('usuarioActual'));
+      this.email=this.aValue[0]['email'];
+      this.nombre=this.aValue[0]['name'];
+      this.apellido=this.aValue[0]['family_name'];
+      this.address=this.aValue[0]['address'];
+      this.usuario=this.aValue[0]['nickname'];
+      this.emailVerificado=this.aValue[0]['email_verified'];
+      this.userCurrent = true;
+      //console.log(aValue);
+     // this.email = aValue['email'];
+    }
+
+    /*
     this.usuarioService.usuarioActual().pipe( tap( (response) => {
       this.userCurrent = true;
       this.email = response.email;
@@ -45,7 +60,7 @@ export class NavComponent implements OnInit {
       this.emailVerificado = true;
     })).subscribe((data: Iuser) => {
       this.router.navigate(['/home']);
-    });
+    });*/
 
 
     this.items = [{

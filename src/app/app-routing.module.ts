@@ -13,10 +13,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'homeD', component: AppComponent},
-  { path: 'signup', component: SignupComponent, canActivate: [LoginGuard]  },
-  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'perfil', component : PerfilUsuarioComponent , canActivate: []},
-  { path: 'administrador', component : AdministradorComponent , canActivate: []},
+  { path: 'signup', component: SignupComponent, },
+  { path: 'login', component: LoginComponent,},
+  { path: 'perfil', component : PerfilUsuarioComponent ,},
+  { path: 'administrador', component : AdministradorComponent ,},
   { path: '**', redirectTo: '/home' }
 ];
 
