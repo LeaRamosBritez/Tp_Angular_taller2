@@ -47,6 +47,17 @@ export class CarritoComponent implements OnInit {
   }
 
   comprar(data:any){
+
+    //Se busca identificador de usuario en localstorage
+    let usuarioJson:any = localStorage.getItem('usuarioActual');
+    let usuarioJsonD = JSON.parse(usuarioJson); 
+    let usuario = usuarioJsonD[0].id; 
+    let usuarioId =  usuario;
+
+    //Ubicamos al final del array el ID del usuario para enviarlo al back
+    let dataLength = data.length;
+    data[dataLength]={usuarioId: usuarioId};
+
     console.log(data);
     this.RestService.post('http://localhost:3050/comprar', data)
     .subscribe(respuesta => {
@@ -56,6 +67,7 @@ export class CarritoComponent implements OnInit {
     this.listaProductosEnCarrito = [];
     this.alertSwitch = true;
     this.total=0;
+
   }
 
   cerrarAlert(){

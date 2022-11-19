@@ -49,7 +49,11 @@ export class LoginComponent implements OnInit {
 
     console.log('se logeo el usuario se logeo el usuario');
     this.router.navigate(['/home']);
-    window.location.reload();
+
+
+    setTimeout(function(){
+      window.location.reload();
+   },1000);
   }
   guardarUsuarioAlLocalStorage(email : String){
     this.usuarioService.obtenerUsuarioPorEmail(email).subscribe((data: Iuser) => {
