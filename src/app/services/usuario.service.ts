@@ -17,6 +17,10 @@ export class UsuarioService {
     return this.httpClient.post(`${this.baseUrl}/registrarUsuario`, usuario);
   }
 
+  guardarUsuarioEnBBDD(usuario: Iuser): any {
+    return this.httpClient.post(`${this.baseUrl}/guardarUsuarioEnBBDD`, usuario);
+  }
+
   loginUsuario(usuario: Iuser): Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}/login`, usuario,{ observe: 'events' }).pipe(tap(
       (res: any) => {

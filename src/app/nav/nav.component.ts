@@ -45,22 +45,8 @@ export class NavComponent implements OnInit {
       this.usuario=this.aValue[0]['nickname'];
       this.emailVerificado=this.aValue[0]['email_verified'];
       this.userCurrent = true;
-      //console.log(aValue);
-     // this.email = aValue['email'];
     }
 
-    /*
-    this.usuarioService.usuarioActual().pipe( tap( (response) => {
-      this.userCurrent = true;
-      this.email = response.email;
-      this.nombre = response.name;
-      this.apellido = response.family_name;
-      this.usuario = response.nickname;
-      this.address = response.address;
-      this.emailVerificado = true;
-    })).subscribe((data: Iuser) => {
-      this.router.navigate(['/home']);
-    });*/
 
 
     this.items = [{
