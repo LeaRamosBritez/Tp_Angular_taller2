@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { MenuItem } from 'primeng/api';
 import { environment } from 'src/environments/environment';
+import { RestService } from '../rest.service';
 
 @Component({
   selector: 'app-perfil',
@@ -19,10 +20,11 @@ export class PerfilUsuarioComponent implements OnInit {
   emailVerificado: boolean;
   attributes: any;
 
-  constructor(private router:Router) { }
+  constructor(private RestService:RestService, private router:Router) { }
 
   ngOnInit(): void {
     this.getAttributes();
+    this.cargarDataCompras();
   }
 
   getAttributes():void{
@@ -33,6 +35,33 @@ export class PerfilUsuarioComponent implements OnInit {
     this.address=this.attributes[0]['address'];
     this.usuario=this.attributes[0]['nickname'];
     this.emailVerificado=true;
+  }
+
+  public listaComprasUsuario:any = [];
+  public listaProductosCompra:any = [];
+
+  public cargarDataCompras(){
+    //Se busca identificador de usuario en localstorage
+    let usuarioJson:any = localStorage.getItem('usuarioActual');
+    let usuarioJsonD = JSON.parse(usuarioJson); 
+    let usuario = usuarioJsonD[0].id; 
+    let usuarioId =  usuario;
+
+    this.RestService.get(`http://localhost:3050/compras/${usuarioId}`)
+    .subscribe(respuesta => {
+      console.log(respuesta);
+      this.listaComprasUsuario = respuesta;
+    });
+  }
+
+  public traerProductosCompra(idCompra:any){
+    this.RestService.get(`http://localhost:3050/compraProductos/${idCompra}`)
+    .subscribe(respuesta => {
+      console.log(respuesta);
+      this.listaProductosCompra = respuesta;
+      console.log(this.listaProductosCompra);
+      alert(JSON.stringify(respuesta));
+    });
   }
 
 }
