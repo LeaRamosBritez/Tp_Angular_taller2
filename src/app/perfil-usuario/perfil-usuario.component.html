@@ -26,6 +26,15 @@
         </tbody></table>
 
 
+<h2>Compras realizadas </h2>
+<div *ngFor="let compra of listaComprasUsuario">
+    <ul>Compra ID: {{compra.id}}
+        <button type="button" class="btn btn-primary" (click)="traerProductosCompra(compra.id)">Ver productos de la compra</button>
+    </ul>
+   
+</div>
+
+
     
     
 
